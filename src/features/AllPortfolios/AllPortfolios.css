@@ -1,0 +1,179 @@
+.all-portfolios-container {
+    /* width: 99vw; */
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: max-content max-content 1fr;
+    flex-direction: column;
+    align-items: center;
+}
+
+.all-portfolios-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.all-portfolios-title > h1 {
+    padding: 0.5rem 0.5rem;
+    color: var(--text-color);
+}
+
+.all-portfolios-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 0.5rem;
+}
+
+.all-portfolios-buttons > button {
+    padding: 0.5rem;
+    border-radius: 3px;
+    border: 2px solid var(--detail-color);
+    background-color: transparent;
+    color: var(--detail-color);
+    cursor: pointer;
+}
+
+.all-portfolios-buttons > button:hover {
+    background-color: var(--detail-color2);
+}
+
+.all-portfolios-list {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex-grow: 2;
+    gap: 0.5rem;
+    justify-content: center;
+    align-content: flex-start;
+}
+
+.portfolio-empty {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.portfolio-empty > h3 {
+    font-size: 5rem;
+    text-align: center;
+    color: var(--background-contrast);
+}
+
+.portfolio-option {
+    border: 5px solid var(--detail-color2);
+    border-radius: 5px;
+    box-shadow: 0 14px 28px rgb(0 0 0 / 25%), 0 10px 10px rgb(0 0 0 / 22%);
+    display: flex;
+    flex-direction: column;
+    margin: 0.4rem;
+    width: 20rem;
+    height: max-content;
+}
+
+.option-title {
+    background-color: var(--detail-color2);
+    color: #e7e8e9;
+    font-size: 1.7rem;
+    padding: 0.5rem;
+}
+
+.option-title > h5 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #fff;
+}
+
+.option-info {
+    height: max-content;
+    width: 100%;
+    padding: 0.5rem;
+    background-color: var(--background-contrast);
+}
+
+.option-info > div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.option-info > div > p {
+    font-size: 1.2rem;
+}
+
+.option-buttons {
+    background-color: var(--detail-color2);
+    display: flex;
+    flex-direction: row;
+    height: -webkit-max-content;
+    height: max-content;
+    justify-content: space-around;
+    padding: 0.5rem;
+    width: 100%;
+}
+
+.go-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 0.3rem;
+    width: 6rem;
+    border-radius: 5px;
+    border: 2px solid transparent;
+    background-color: var(--background-contrast);
+    color: var(--detail-color);
+    cursor: pointer;
+}
+
+.go-button > p{
+    font-size: 1rem;
+    fill: var(--detail-color);
+}
+
+.go-button > svg{
+    font-size: 1rem;
+    fill: var(--detail-color);
+}
+
+.disabled {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 6rem;
+    padding: 0.2rem;
+    border-radius: 5px;
+    border: 2px solid var(--detail-color);
+    background-color: transparent;
+    color: var(--detail-color);
+}
+
+.disabled > p{
+    font-size: 1rem;
+    color: var(--detail-color);
+}
+
+.disabled > p>svg{
+    font-size: 1rem;
+    fill: var(--detail-color);
+}
+
+@media (max-width: 400px){
+    .portfolio-option {
+        width: 80vw;
+    }
+
+    .option-info > div > p {
+        font-size: 1rem;
+    }
+
+    .portfolio-empty > h3 {
+        font-size: 3rem;
+    }
+}

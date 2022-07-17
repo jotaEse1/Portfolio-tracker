@@ -1,0 +1,207 @@
+.chart-container {
+    height: 90vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 0rem;
+    
+}
+
+.chart-graphs-options {
+    width: 100%;
+    height: max-content;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.graphs-options-container {
+    width: max-content;
+    height: max-content;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 0.2rem;
+    margin: 0.5rem;
+    background-color: var(--background);
+    border-radius: 5px;
+}
+
+.graphs-options {
+    border-radius: 4px;
+    padding: 0.3rem;
+    cursor: pointer;
+}
+
+.graphs-options-selected {
+    background: var(--detail-color2);
+    color: var(--detail-color);
+    border-radius: 4px;
+    padding: 0.3rem;
+    cursor: pointer;
+}
+
+.chart-pannel {
+    justify-self: flex-end;
+    width: max-content;
+    height: max-content;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 0.2rem;
+    margin: 0.5rem;
+    background-color: var(--background);
+    border-radius: 5px;
+}
+
+.chart-pannel > div > p {
+    text-align: center;
+    font-size: 12px;
+}
+
+.time-option {
+    padding: 0.3rem;
+    width: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    border: 2px solid transparent;
+    color: var(--detail-color);
+    cursor: pointer;
+}
+
+.time-selected {
+    padding: 0.3rem;
+    width: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    border: 2px solid var(--detail-color);
+    cursor: pointer;
+}
+
+.time-selected > p{
+    text-align: center;
+    color: var(--detail-color);
+}
+
+
+
+.chart {
+    height: 100%;
+    width: 90%;
+    display: grid;
+    grid-template-rows: max-content max-content 1fr;
+    background-color: var(--background-contrast);
+    border-radius: 5px;
+    
+}
+
+.line {
+    stroke: var(--detail-color);
+}
+
+.x {
+    stroke: var(--detail-color) 
+}
+
+.y {
+    stroke: var(--detail-color) 
+}
+
+.stop-1 {
+    stop-color: var(--chart-shadow);
+}
+
+.stop-2 {
+    stop-color: transparent;
+}
+
+.textX {
+    font-size: 15px;
+    fill: var(--text-color);
+}
+
+.tick > line {
+    /* stroke: transparent; */
+}
+
+.tooltip {
+    width: max-content;
+    height: max-content;
+    padding: 0.3rem;
+    background-color: var(--background);
+    border-radius: 3px;
+    position: absolute;
+    box-shadow: 0 14px 28px rgb(0 0 0 / 25%), 0 10px 10px rgb(0 0 0 / 22%);
+}
+
+.tooltip > p {
+    color: var(--detail-color);
+}
+
+.tooltip-tree {
+    width: max-content;
+    height: max-content;
+    padding: 0.3rem;
+    background-color: #121212;
+    border-radius: 3px;
+    position: absolute;
+    box-shadow: 0 14px 28px rgb(0 0 0 / 25%), 0 10px 10px rgb(0 0 0 / 22%);
+}
+
+.tooltip-tree > p {
+    color: #FFFF00;
+}
+
+.circle {
+    fill: var(--detail-color);
+    stroke: transparent;
+}
+
+#foreign-hover {
+    border: 2px solid #FFFF00;
+}
+
+#foreign {
+    border: 2px solid transparent;
+}
+
+#tree-text-hover {
+    color: #FFFF00 !important;
+}
+
+#tree-text {
+    color: #fff !important;
+}
+
+@media (max-width: 570px){
+    .chart-container {
+        height: 70vh;
+        
+    }
+
+    .chart {
+        width: 95%;
+    }
+
+    .chart-pannel {
+        width: 95%;
+    }
+
+    .graphs-options-container {
+        width: 95%;
+    }
+}

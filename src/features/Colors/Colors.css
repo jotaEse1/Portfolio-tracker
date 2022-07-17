@@ -1,0 +1,114 @@
+.colors-container-close {
+    position: fixed;
+    z-index: 300;
+    top: 2vh;
+    left: 5vw;
+    width: max-content;
+    height: max-content;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    background-color: var(--background-contrast);
+    cursor: pointer;
+}
+
+.colors-container-open {
+    position: fixed;
+    z-index: 300;
+    top: 2vh;
+    left: 5vw;
+    width: max-content;
+    height: max-content;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    background-color: var(--background-contrast);
+    cursor: pointer;
+}
+
+.one-color-door {
+    width: 1.5rem;
+    height: 1.5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    cursor: pointer;
+}
+
+.one-color-door-2 {
+    width: 1.5rem;
+    height: 1.5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    cursor: pointer;
+    background-color: var(--background-contrast);
+}
+
+.one-color-f {
+    width: 1.5rem; /*200px */ 
+    height: 0.75rem; /*100px */ 
+    border-top-left-radius: 0.8rem; /*110px */ 
+    border-top-right-radius: 0.8rem; /*110px */ 
+    border-bottom: 0;
+}
+
+.one-color-s {
+    width: 1.5rem; /*200px */ 
+    height: 0.75rem; /*100px */ 
+    border-top-left-radius: 0.8rem; /*110px */ 
+    border-top-right-radius: 0.8rem; /*110px */ 
+    border-bottom: 0;
+    transform: rotate(180deg);
+}
+
+.all-colors {
+    width: max-content;
+    height: max-content;
+    background-color: transparent;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding-left: 0.5rem;
+}
+
+.color-option-container{
+    display: flex;
+    width: max-content;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+}
+
+.selected {
+    border: 0.12rem solid var(--oposite-color);
+}
+
+@media (max-width: 858px){
+    .colors-container-close {
+        flex-direction: column;
+    }
+
+    .colors-container-open {
+        flex-direction: column;
+        border: 1px solid var(--oposite-color);
+    }
+    
+    .all-colors {
+        flex-direction: column;
+        padding-left: 0rem;
+        padding-top: 0.5rem;
+    }
+}

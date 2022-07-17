@@ -1,0 +1,162 @@
+.transactions-container {
+    width: 100%;
+    height: 100vh;
+    display: grid;
+    grid-template-rows: max-content 1fr;
+    justify-items: center;
+    padding-bottom: 0.5rem;
+}
+
+.button-container {
+    width: 100%;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.button-container > button {
+    height: max-content;
+    padding: 0.4rem;
+    border-radius: 2px;
+    border: 2px solid transparent;
+    background-color: var(--detail-color2);
+    color: var(--detail-color);
+    cursor: pointer;
+}
+
+.button-container > button > svg {
+    fill: var(--detail-color);
+}
+
+.button-container > h2 {
+    text-align: center;
+    padding-left: 0.5rem;
+    justify-self: center;
+}
+
+.pagination-info-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding: 0.5rem 0.5rem 0.5rem 1.5rem;
+}
+
+.pagination-info-container > select {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    border-bottom: 2px solid var(--detail-color2);
+    color: var(--detail-color);
+}
+
+.pagination-info-container > select > option {
+    background-color: var(--background-contrast);
+    color: var(--text-color);
+}
+
+.transactions-table-container {
+    width: 90%;
+    overflow-y: auto;
+}
+
+.transactions-table-container> table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 18px 50px -10px;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.transactions-table-container> table > thead > tr {
+    position: sticky;
+    z-index: 35;
+    top: 0;
+    left: 0;
+    background: var(--detail-color);
+    border-top: 2px solid var(--detail-color);
+    border-bottom: 2px solid var(--detail-color);
+}
+
+.transactions-table-container> table > thead > tr > th {
+    border-top: 2px solid var(--detail-color2);
+    border-bottom: 2px solid var(--detail-color2);
+    padding: 0.5rem;
+    white-space: nowrap;
+    text-align: center ;
+    color: var(--background);
+}
+
+.transactions-table-container> table > tbody > tr > td {
+    border-top: 2px solid var(--detail-color2);
+    border-bottom: 2px solid var(--detail-color2);
+    padding: 0.5rem;
+    white-space: nowrap;
+    text-align: center ;
+}
+
+.th-name-transaction {
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 20;
+    background: var(--detail-color);
+    border-top: 2px solid var(--detail-color2);    
+    text-align: left !important;
+    color: var(--background);
+    display: flex;
+    flex-direction: row;
+}
+
+.th-name-transaction > div > p{ 
+    height: max-content;
+    width: max-content;
+    cursor: pointer;
+}
+
+.th-name-transaction > div > p > svg{
+    fill: var(--background);
+}
+
+.td-name-transaction {
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 20;
+    background-color: var(--background);
+    border-bottom: 2px solid var(--detail-color2);    
+    text-align: left !important;
+}
+
+.return-table-positive {
+    color: #47b877;
+    font-weight: 600;
+}
+
+.return-table-positive > svg {
+    fill: #47b877;
+}
+
+.return-table-negative {
+    color: #f63b40;
+    font-weight: 600;
+}
+
+.return-table-negative > svg {
+    fill: #f63b40;
+}
+
+.tr-ticker-flow {
+    background-color: var(--background-contrast);
+}
+
+.td-name-flow-transaction {
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 20;
+    background-color: var(--background-contrast);
+    border-bottom: 2px solid var(--detail-color2);    
+    text-align: left !important;
+}
+

@@ -1,0 +1,13 @@
+/* [data-theme ='blue']{
+    --background: #120049;
+    --text-color: #fff;
+    --border-color: rgb(20, 5, 70);
+    --detail-color: #fff7;
+    --line-chart-color: #fff2;
+    --boxShadow-color: transparent;
+    --transition-details: .4s;
+} */
+
+.counter-container {
+    background-color: var(--background);
+}

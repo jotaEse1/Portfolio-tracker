@@ -1,0 +1,44 @@
+.header {
+    position: relative;
+    width: 100%;
+    border-bottom: 0.5px solid var(--detail-color);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 4rem;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background-color: var(--background);
+}
+  
+.header > h2 {
+    text-align: center;
+    color: var(--text-color);
+}
+
+@media (max-width: 450px){
+    .header > h2 {
+        width: 10rem;
+    }
+
+    /*
+    .header {
+        flex-direction: column;
+    }
+    
+    .header > h2 {
+        margin-left: 0;
+    }
+    
+    .header > nav > ul {
+        width: 98vw;
+    }
+    
+    .header > nav > ul > li {
+        width: 6rem;
+        text-align: center;
+    }
+    */
+} 

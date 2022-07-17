@@ -1,0 +1,19 @@
+.ticker-chart-container {
+    height: 90vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 0rem;
+}
+
+.svg-ticker-container {
+    width: 90%;
+    height: 100%;
+}
+
+.line-ticker {
+    stroke: var(--detail-color);
+}
+

@@ -1,0 +1,77 @@
+.tickerInfo-modal {
+    position: fixed;
+    width: 100vw;
+    min-height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: 150;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #0008;
+}
+
+.tickerInfo-container > button[type='button'] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0.2rem;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.tickerInfo-container > button[type='button'] > svg {
+    font-size: 1.3rem;
+    color: #fff;
+}
+
+.tickerInfo-container > button[type='submit'] {
+    padding: 0.5rem;
+    border-radius: 5px;
+    border-color: transparent;
+    background-color: var(--detail-color2);
+    color: var(--detail-color);
+    cursor: pointer;
+}
+/* 
+background-color: var(--detail-color2);
+    border: none;
+    color: #fff;
+    padding: 0.5rem;
+    border-radius: 3px;
+    margin: 0.2rem 0.2rem;
+    cursor: pointer;  
+*/
+
+.tickerInfo-container {
+    position: relative;
+    z-index: 40;
+    width: 18rem;
+    height: 20rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    border-radius: 3px;
+    box-shadow: 0px 0px 25px 0px #000;
+    background-color: var(--background);
+}
+
+.tickerInfo-container > div {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    justify-content: space-between;
+}
+
+.tickerInfo-container > div > input {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    border-bottom: 2px solid var(--detail-color);
+    color: var(--detail-color);
+    padding: 0.2rem;
+}

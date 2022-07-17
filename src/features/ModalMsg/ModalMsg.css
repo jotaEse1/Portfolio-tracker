@@ -1,0 +1,19 @@
+.modal-msg-container {
+    position: fixed;
+    z-index: 80;
+    top: 5vh;
+    right: 5%;
+    background-color: var(--background-contrast);
+    border: 2px solid var(--detail-color2);
+    border-radius: 3px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+
+.modal-msg-container > p {
+    color: var(--text-color);
+    font-weight: bold;
+}
