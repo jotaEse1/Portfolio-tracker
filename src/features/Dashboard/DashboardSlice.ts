@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { URLS } from "../../enums/enums";
-import { HoldingsSend, Portfolio, PortfolioSend, UpdatePortfolio } from "../../types/types";
+import { HoldingsSend, Portfolio, PortfolioRecived, PortfolioSend, UpdatePortfolio } from "../../types/types";
 import { assetsConverter } from "../../utils/assetsConverter";
 import { dates } from "../../utils/dates";
 import { closeLoader } from "../Loader/LoaderSlice";
@@ -51,7 +51,7 @@ export const getPortfolios = createAsyncThunk('dashboard/getPortfolios',
 )
 
 export const createPortfolio = createAsyncThunk('dashboard/createPortfolios',
-    async (portfolio: PortfolioSend, thunkAPI) => {
+    async (portfolio: PortfolioSend, {getState, dispatch, rejectWithValue}) => {
         const options: RequestInit = {
             method: 'POST',
             headers: {
@@ -64,28 +64,29 @@ export const createPortfolio = createAsyncThunk('dashboard/createPortfolios',
         try {
             const req = await fetch(URLS.PORTFOLIO, options),
                 response = await req.json(),
-                { tickersInvalidDate, tickersNotFound } = thunkAPI.getState().portfolioModal;
+                {portfolioModal} = getState() as {portfolioModal: any},
+                { tickersInvalidDate, tickersNotFound } = portfolioModal;
 
             if (tickersInvalidDate.length || tickersNotFound.length) {
                 setTimeout(() => {
-                    thunkAPI.dispatch(openIP())
+                    dispatch(openIP())
                 }, 2000);
             }
             if (!response.success) {
-                thunkAPI.dispatch(closeLoader())
-                thunkAPI.dispatch(setMsg(response.payload.msg))
-                thunkAPI.dispatch(openMM())
-                setTimeout(() => thunkAPI.dispatch(closeMM()), 3500)
+                dispatch(closeLoader())
+                dispatch(setMsg(response.payload.msg))
+                dispatch(openMM())
+                setTimeout(() => dispatch(closeMM()), 3500)
             } else {
-                thunkAPI.dispatch(closeLoader())
-                thunkAPI.dispatch(setMsg(response.payload.msg))
-                thunkAPI.dispatch(openMM())
-                setTimeout(() => thunkAPI.dispatch(closeMM()), 3500)
+                dispatch(closeLoader())
+                dispatch(setMsg(response.payload.msg))
+                dispatch(openMM())
+                setTimeout(() => dispatch(closeMM()), 3500)
                 return response.payload.data
             }
         } catch (error) {
             console.log(error)
-            return thunkAPI.rejectWithValue(`An error ocurred while trying to create ${portfolio.name} portfolio`);
+            return rejectWithValue(`An error ocurred while trying to create ${portfolio.name} portfolio`);
         }
     }
 )
@@ -193,7 +194,7 @@ export const updatePortfolio = createAsyncThunk('dashboard/updatePortfolio',
 )
 
 export const holdingActions = createAsyncThunk('dashboard/holdingActions',
-    async (portfolio: HoldingsSend, thunkAPI) => {
+    async (portfolio: HoldingsSend, {getState, dispatch, rejectWithValue}) => {
         const options: RequestInit = {
             method: 'POST',
             headers: {
@@ -206,28 +207,29 @@ export const holdingActions = createAsyncThunk('dashboard/holdingActions',
         try {
             const req = await fetch(URLS.HOLDINGS, options),
                 response = await req.json(),
-                { tickersInvalidDate, tickersNotFound } = thunkAPI.getState().portfolioModal;
+                {portfolioModal} = getState() as {portfolioModal: any},
+                { tickersInvalidDate, tickersNotFound } = portfolioModal;
 
             if (tickersInvalidDate.length || tickersNotFound.length) {
                 setTimeout(() => {
-                    thunkAPI.dispatch(openIP())
+                    dispatch(openIP())
                 }, 2000);
             }
             if (!response.success) {
-                thunkAPI.dispatch(closeLoader())
-                thunkAPI.dispatch(setMsg(response.payload.msg))
-                thunkAPI.dispatch(openMM())
-                setTimeout(() => thunkAPI.dispatch(closeMM()), 3500)
+                dispatch(closeLoader())
+                dispatch(setMsg(response.payload.msg))
+                dispatch(openMM())
+                setTimeout(() => dispatch(closeMM()), 3500)
             } else {
-                thunkAPI.dispatch(closeLoader())
-                thunkAPI.dispatch(setMsg(response.payload.msg))
-                thunkAPI.dispatch(openMM())
-                setTimeout(() => thunkAPI.dispatch(closeMM()), 3500)
+                dispatch(closeLoader())
+                dispatch(setMsg(response.payload.msg))
+                dispatch(openMM())
+                setTimeout(() => dispatch(closeMM()), 3500)
                 return response.payload.data
             }
         } catch (error) {
             console.log(error)
-            return thunkAPI.rejectWithValue(`An error ocurred while trying to ${portfolio.ui} holdings`);
+            return rejectWithValue(`An error ocurred while trying to ${portfolio.ui} holdings`);
         }
     }
 )
@@ -256,7 +258,7 @@ const dashBoardSlice = createSlice({
 
             console.log(payload.portfolios)
 
-            payload.portfolios.forEach(obj => {
+            payload.portfolios.forEach((obj: PortfolioRecived) => {
                 obj.returns = JSON.parse(obj.returns)
                 obj.tickers = JSON.parse(obj.tickers)
             });
@@ -269,7 +271,7 @@ const dashBoardSlice = createSlice({
 
             if(!payload) return
 
-            payload.portfolios.forEach(obj => {
+            payload.portfolios.forEach((obj: PortfolioRecived) => {
                 obj.returns = JSON.parse(obj.returns)
                 obj.tickers = JSON.parse(obj.tickers)
             });
@@ -279,7 +281,7 @@ const dashBoardSlice = createSlice({
         builder.addCase(renamePortfolio.fulfilled, (state, action) => {
             const { payload } = action;
 
-            payload.portfolios.forEach(obj => {
+            payload.portfolios.forEach((obj: PortfolioRecived) => {
                 obj.returns = JSON.parse(obj.returns)
                 obj.tickers = JSON.parse(obj.tickers)
             });
@@ -290,7 +292,7 @@ const dashBoardSlice = createSlice({
         builder.addCase(deletePortfolio.fulfilled, (state, action) => {
             const { payload } = action;
 
-            payload.portfolios.forEach(obj => {
+            payload.portfolios.forEach((obj: PortfolioRecived) => {
                 obj.returns = JSON.parse(obj.returns)
                 obj.tickers = JSON.parse(obj.tickers)
             });
@@ -302,11 +304,11 @@ const dashBoardSlice = createSlice({
             let { payload } = action,
                 current: Portfolio = {} as Portfolio;
 
-            payload.portfolios.forEach(obj => {
+            payload.portfolios.forEach((obj: PortfolioRecived) => {
                 obj.returns = JSON.parse(obj.returns)
                 obj.tickers = JSON.parse(obj.tickers)
 
-                if (obj.id === payload.idPortfolio) current = obj
+                if (obj.id === payload.idPortfolio) current = obj as unknown as Portfolio
             });
 
             state.currentPortfolio = current
@@ -315,7 +317,7 @@ const dashBoardSlice = createSlice({
         builder.addCase(updatePortfolio.fulfilled, (state, action) => {
             let { payload } = action
 
-            payload.portfolios.forEach(obj => {
+            payload.portfolios.forEach((obj: PortfolioRecived) => {
                 obj.returns = JSON.parse(obj.returns)
                 obj.tickers = JSON.parse(obj.tickers)
             });

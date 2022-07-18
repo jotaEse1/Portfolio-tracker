@@ -99,16 +99,25 @@
 @media (max-width: 858px){
     .colors-container-close {
         flex-direction: column;
+        width: 2.5rem;
+        height: 2.5rem;
+        padding: 0rem;
     }
 
     .colors-container-open {
         flex-direction: column;
         border: 1px solid var(--oposite-color);
+        width: 2.5rem;
     }
     
     .all-colors {
         flex-direction: column;
         padding-left: 0rem;
         padding-top: 0.5rem;
+        gap: 0rem;
+    }
+
+    .all-colors > div {
+        margin: 0.15rem 0rem;
     }
 }

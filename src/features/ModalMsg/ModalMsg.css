@@ -1,6 +1,6 @@
 .modal-msg-container {
     position: fixed;
-    z-index: 80;
+    z-index: 500;
     top: 5vh;
     right: 5%;
     background-color: var(--background-contrast);
@@ -16,4 +16,10 @@
 .modal-msg-container > p {
     color: var(--text-color);
     font-weight: bold;
+}
+
+@media (max-width: 480px){
+    .modal-msg-container {
+        right: 1%;
+    }
 }

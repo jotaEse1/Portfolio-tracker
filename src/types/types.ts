@@ -1,9 +1,21 @@
+// export interface ShareFlow {
+//     [key: string]: { //date unix _18124389
+//         purchaseDate: string,
+//         purchaseDateUnix: number,
+//         purchasePrice: number,
+//         purchaseStocks: number,
+//     },
+//     total: number,
+//     totalIn: number
+// }
 export interface ShareFlow {
-    [key: string]: { //date unix _18124389
-        purchaseDate: string,
-        purchaseDateUnix: number,
-        purchasePrice: number,
-        purchaseStocks: number,
+    shares: {
+        [key: string]: { //date unix _18124389
+            purchaseDate: string,
+            purchaseDateUnix: number,
+            purchasePrice: number,
+            purchaseStocks: number,
+        }
     },
     total: number,
     totalIn: number
@@ -226,8 +238,8 @@ export interface TickerDescription {
     data: TickerAPI[],
     returns: TickerReturns,
     sharesFlow: {
-        in: ShareFlow | false,
-        out: ShareFlow | false
+        in: ShareFlow,
+        out: ShareFlow
     },
     allocation: number,
     currentPrice: number
@@ -294,13 +306,37 @@ export interface PortfolioSend {
     returns: {}
 }
 
+export interface PortfolioRecived {
+    id: number,
+    name: string,
+    id_user: number,
+    last_update: string,
+    value: number,
+    tickers: string,
+    returns: string
+}
+
+// export interface AddMoney {
+//     [key: string]: { //tickername 
+//         [key: string]: { //date unix _18124389
+//             purchaseDate: string,
+//             purchaseDateUnix: number,
+//             purchasePrice: number,
+//             purchaseStocks: number,
+//         },
+//         total: number,
+//         totalIn: number
+//     }
+// }
 export interface AddMoney {
     [key: string]: { //tickername 
-        [key: string]: { //date unix _18124389
-            purchaseDate: string,
-            purchaseDateUnix: number,
-            purchasePrice: number,
-            purchaseStocks: number,
+        shares: {
+            [key: string]: { //date unix _18124389
+                purchaseDate: string,
+                purchaseDateUnix: number,
+                purchasePrice: number,
+                purchaseStocks: number,
+            }
         },
         total: number,
         totalIn: number

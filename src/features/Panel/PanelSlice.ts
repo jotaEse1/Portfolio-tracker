@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface ActionType {
-    period: string, 
+    period: '_1M' | '_3M' | '_6M' | 'YTD' | 'SI',
     method: string
 }
 

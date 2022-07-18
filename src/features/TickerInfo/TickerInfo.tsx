@@ -109,7 +109,7 @@ const TickerInfo = () => {
                 </div>
                 <button
                     type='button'
-                    id='close'
+                    
                     onClick={() => dispatch(closeTI())}
                 >
                     <IoMdClose />

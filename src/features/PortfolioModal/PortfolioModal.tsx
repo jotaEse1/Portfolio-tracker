@@ -5,7 +5,7 @@ import PaginationPM from '../PaginationPM/PaginationPM';
 import { addInvalidDate, addNotFound, closePM, emptyTickerRow, emptyTickersIncomplete} from './PortfolioModalSlice';
 import { useState } from 'react';
 import { fetchDataTickers } from '../../utils/fetchTickersData';
-import { PortfolioSend, TickerSend, AddMoney, ShareFlow, TickerRow, TickerError } from '../../types/types';
+import { PortfolioSend, TickerSend, AddMoney, ShareFlow} from '../../types/types';
 import { dates } from '../../utils/dates';
 import { createPortfolio } from '../Dashboard/DashboardSlice';
 import { assetsConverter } from '../../utils/assetsConverter';
@@ -63,14 +63,15 @@ const PortfolioModal = () => {
                 if (response.status === 100){
                     const {name, ...data} = response.payload
 
-                    if(!addMoney[name]){
-                        addMoney[name] = {total: 0, totalIn: 0} as ShareFlow
+                    if (!addMoney[name]) {
+                        addMoney[name] = { shares: {}, total: 0, totalIn: 0 } as ShareFlow
 
-                        addMoney[name][`_${data.purchaseDateUnix}`] = data
+                        addMoney[name].shares[`_${data.purchaseDateUnix}`] = data
                         addMoney[name].total = Number((data.purchasePrice * data.purchaseStocks).toFixed(2))
                         addMoney[name].totalIn = Number(data.purchaseStocks)
-                    }else{
-                        addMoney[name][`_${data.purchaseDateUnix}`] = data
+
+                    } else {
+                        addMoney[name].shares[`_${data.purchaseDateUnix}`] = data
                         addMoney[name].total += data.purchasePrice * data.purchaseStocks
                         addMoney[name].total = Number((addMoney[name].total).toFixed(2))
                         addMoney[name].totalIn += Number(data.purchaseStocks)

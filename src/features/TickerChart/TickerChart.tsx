@@ -455,7 +455,7 @@ const TickerChart = () => {
                     .data(hundredCandles)
                     .join("rect")
                     .attr("x", (d) => xScale(d.datetime) - band_width * 0.5)
-                    .attr("y", (d) => yScale(d3.max([d.open, d.close])))
+                    .attr("y", (d) => yScale(d3.max([d.open, d.close])!))
                     .attr("width", band_width)
                     .attr("height", (d) => Math.abs(yScale(d.open) - yScale(d.close)))
                     .attr("fill", (d) => (d.open < d.close ? "green" : "red"))

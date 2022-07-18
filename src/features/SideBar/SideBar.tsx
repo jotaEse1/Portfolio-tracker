@@ -22,34 +22,32 @@ const SideBar = () => {
         dispatch(closeBar())
         dispatch(openLoader())
 
-        const tickersArr: TickerRow[] = [],
-            tickersOut: TickerRow[] = [];
+        const tickersArr: TickerRow[] = [];
 
         setTimeout(() => {
 
             for (let i = 0; i < currentPortfolio.tickers.length; i++) {
                 const { id, name, purchaseDate, purchaseDateUnix, purchasePrice, purchaseStocks, sharesFlow } = currentPortfolio.tickers[i];
 
-                if (!!sharesFlow.in) {
-                    const keys = Object.keys(sharesFlow.in)
+                if (!!sharesFlow.in.shares) {
+                    const keys = Object.keys(sharesFlow.in.shares)
 
                     for (let j = 0; j < keys.length; j++) {
                         const key = keys[j];
-
-                        if (key === 'total' || key === 'totalIn') continue
 
                         console.log(key)
                         tickersArr.push({
                             id: Date.now().toString(30) + Math.random().toString(30),
                             name,
-                            purchaseDate: sharesFlow.in[key].purchaseDate,
-                            purchaseDateUnix: sharesFlow.in[key].purchaseDateUnix,
-                            purchasePrice: sharesFlow.in[key].purchasePrice,
-                            purchaseStocks: sharesFlow.in[key].purchaseStocks
+                            purchaseDate: sharesFlow.in.shares[key].purchaseDate,
+                            purchaseDateUnix: sharesFlow.in.shares[key].purchaseDateUnix,
+                            purchasePrice: sharesFlow.in.shares[key].purchasePrice,
+                            purchaseStocks: sharesFlow.in.shares[key].purchaseStocks
                         })
 
                     }
                 }
+                /*
                 if (!!sharesFlow.out) {
                     const keys = Object.keys(sharesFlow.out)
 
@@ -81,6 +79,7 @@ const SideBar = () => {
 
                     }
                 }
+                */
 
                 tickersArr.push({ id, name, purchaseDate, purchaseDateUnix, purchasePrice, purchaseStocks })
             }

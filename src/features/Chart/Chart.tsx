@@ -15,7 +15,7 @@ const Chart = () => {
     useEffect(() => {
         if (!Object.keys(currentPortfolio).length) return;
 
-        if (currentChartTipe.title === 'Tree Map') d3TreeChart(currentPortfolio)
+        if (currentChartTipe.key === 'tree') d3TreeChart(currentPortfolio)
         else d3LineChart(currentPortfolio.returns.graph)
 
     }, [currentPortfolio, currentTime, currentChartTipe])
@@ -93,10 +93,11 @@ const Chart = () => {
         //     .remove()
 
         //scales
-        const minDate = d3.min(keys, d => Number(d.slice(1))),
+        const graphKey = currentChartTipe.key === 'tree'? 'percentage' : currentChartTipe.key,
+            minDate = d3.min(keys, d => Number(d.slice(1))),
             maxDate = d3.max(keys, d => Number(d.slice(1))),
-            maxPrice = d3.max(keys, d => data[d][currentChartTipe.key]),
-            minPrice = d3.min(keys, d => data[d][currentChartTipe.key]),
+            maxPrice = d3.max(keys, d => data[d][graphKey]),
+            minPrice = d3.min(keys, d => data[d][graphKey]),
             paddingDates = 30000000,
             paddingValues = currentChartTipe.key === 'total' ? maxPrice! * 0.10 : 0.05,
             yFormat = currentChartTipe.key === 'total' ? '~s' : ',.1%',
@@ -130,7 +131,7 @@ const Chart = () => {
             .attr('transform', `translate(0, ${height - 25})`)
             .attr('class', 'axis')
             .style('fill', 'transparent')
-            .call(d3.axisBottom(xScale).ticks(period).tickFormat(d3.timeFormat(xFormat)))
+            .call(d3.axisBottom<any>(xScale).ticks(period).tickFormat(d3.timeFormat(xFormat)))
 
         const yAxis = svg.append('g')
             .attr('transform', `translate(${padding}, 0)`)
@@ -212,7 +213,7 @@ const Chart = () => {
             .attr('class', 'line')
             .attr("d", d3.line<any>()
                 .x((d: string) => xScale(Number(d.slice(1))))
-                .y((d: string) => yScale(data[d][currentChartTipe.key]))
+                .y((d: string) => yScale(data[d][graphKey]))
                 .curve(d3.curveCatmullRom.alpha(0.5))
             )
             .attr("filter", "url(#dropshadow)");
@@ -283,7 +284,7 @@ const Chart = () => {
                 d1 = x0,
                 d = x0 - d0 > d1 - x0 ? d1 : d0,
                 xValue: number = `_${d}` in data ? d : 0,
-                yValue: number = `_${d}` in data ? data[`_${d}`][currentChartTipe.key] : 0;
+                yValue: number = `_${d}` in data ? data[`_${d}`][graphKey] : 0;
 
             if (xValue || yValue) {
                 focus.select(".circle")
@@ -307,8 +308,8 @@ const Chart = () => {
                 tooltip.style("top", `${evt.pageY - 30.38}px`)
                     .style("left", `${evt.pageX >= width * 0.50 ? evt.pageX - 170 : evt.pageX + 10}px`)
                     .html(currentChartTipe.key === 'total'
-                        ? `<p>$ ${(data[`_${d}`][currentChartTipe.key]).toFixed(2)}  ${data[`_${d}`].date}</p>`
-                        : `<p>${(data[`_${d}`][currentChartTipe.key] * 100).toFixed(2)}%  ${data[`_${d}`].date}</p>`
+                        ? `<p>$ ${(data[`_${d}`][graphKey]).toFixed(2)}  ${data[`_${d}`].date}</p>`
+                        : `<p>${(data[`_${d}`][graphKey] * 100).toFixed(2)}%  ${data[`_${d}`].date}</p>`
                     )
 
             }
@@ -331,7 +332,7 @@ const Chart = () => {
             .attr('d', d3.area<any>()
                 .x((d: string) => xScale(Number(d.slice(1))))
                 .y0(height - 25)
-                .y1((d: string) => yScale(data[d][currentChartTipe.key]))
+                .y1((d: string) => yScale(data[d][graphKey]))
                 .curve(d3.curveCatmullRom.alpha(0.5))
             )
 
@@ -429,15 +430,15 @@ const Chart = () => {
             .style('opacity', 0)
             .remove()
 
-        const svg = d3.select(svgRef.current)
+        const svg = d3.select<SVGElement, unknown>(svgRef.current!)
             .append('g')
             .attr('class', 'tree-map-g')
             .attr('transform', `translate(${padding / 2}, ${padding / 2})`)
-            .call(d3.zoom()
+            .call(d3.zoom<any, any>()
                 .duration(1000)
                 .scaleExtent([1, 8]) //limits the zoom
                 .translateExtent([[0, 0], [width - padding, height - padding]]) //limits the panning
-                .on("zoom", (evt: PointerEvent) => {
+                .on("zoom", (evt: any) => {
                     svg.attr("transform", evt.transform)
                 })
             );
@@ -448,10 +449,9 @@ const Chart = () => {
                 if (d.name === currentPortfolio.name) return 0
 
                 const ppal = Number(d.currentPrice) * Number(d.purchaseStocks),
-                    totalIn = !!d.sharesFlow.in ? d.sharesFlow.in.totalIn * Number(d.currentPrice) : 0,
-                    totalOut = !!d.sharesFlow.out ? d.sharesFlow.out.totalOut * Number(d.currentPrice) : 0;
+                    totalIn = !!d.sharesFlow.in.totalIn ? d.sharesFlow.in.totalIn * Number(d.currentPrice) : 0
 
-                return (ppal + totalIn - totalOut) / currentPortfolio.value
+                return (ppal + totalIn) / currentPortfolio.value
             })
             .sort((a: any, b: any) => b.value - a.value)
 
@@ -475,7 +475,7 @@ const Chart = () => {
         tree.append('rect')
             .attr('width', d => d.x1 - d.x0)
             .attr('height', d => 0)
-            .attr('class', d => `${d.data.name}-rect`)
+            .attr('class', (d: any) => `${d.data.name}-rect`)
             .attr('fill', 'white')
             .attr('opacity', 0)
             .transition().duration(1500).delay((d, i) => 30 * i)
@@ -484,14 +484,14 @@ const Chart = () => {
             .style('stroke', 'transparent')
             .style('stroke-width', '1px')
             .attr('opacity', 1)
-            .attr("fill", (d: any) => {
+            .attr("fill", (d: any) : string => {
                 if (d.data.returns._1Day['%'] * 100 <= -3) return colors[0]
                 else if (d.data.returns._1Day['%'] * 100 <= -2) return colors[1]
                 else if (d.data.returns._1Day['%'] * 100 <= -1) return colors[2]
                 else if (d.data.returns._1Day['%'] * 100 <= 0) return colors[3]
                 else if (d.data.returns._1Day['%'] * 100 <= 1) return colors[4]
                 else if (d.data.returns._1Day['%'] * 100 <= 2) return colors[5]
-                else if (d.data.returns._1Day['%'] * 100 >= 1) return colors[6]
+                else return colors[6]
             })
             //.on("mousemove", (evt: PointerEvent) => mousemove(evt));
 
@@ -499,14 +499,14 @@ const Chart = () => {
             .attr('x', 0)
             .attr('y', 0)
             .attr('style', d => `width: ${d.x1 - d.x0}; height: ${d.y1 - d.y0}; padding: 2px;`)
-            .attr('class', d => `${d.data.name}-obj`)
+            .attr('class', (d: any) => `${d.data.name}-obj`)
             .attr('id', 'foreign')
-            .on("mouseover", (evt, d) => {
+            .on("mouseover", (evt, d: any) => {
                 const selector = d.data.name,
                     foreign = document.querySelector(`.${selector}-obj`),
-                    div = foreign.children;
+                    div = foreign!.children;
 
-                foreign.id = 'foreign-hover'
+                foreign!.id = 'foreign-hover'
                 div[0].id = 'tree-text-hover'
 
                 tooltip.style("visibility", "visible")
@@ -515,12 +515,12 @@ const Chart = () => {
                     .style("left", `${evt.pageX >= width * 0.50 ? evt.pageX - 170 : evt.pageX + 10}px`)
                     .html(`<p>${d.data.name} ${(d.data.returns._1Day['%'] * 100).toFixed(2)} %</p>`)
             })
-            .on("mouseout", (evt, d) => {
+            .on("mouseout", (evt, d: any) => {
                 const selector = d.data.name,
                     foreign = document.querySelector(`.${selector}-obj`),
-                    div = foreign.children;
+                    div = foreign!.children;
 
-                foreign.id = 'foreign'
+                foreign!.id = 'foreign'
                 div[0].id = 'tree-text'
 
                 tooltip.style("visibility", "hidden")

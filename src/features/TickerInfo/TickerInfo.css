@@ -24,7 +24,7 @@
 
 .tickerInfo-container > button[type='button'] > svg {
     font-size: 1.3rem;
-    color: #fff;
+    color: var(--text-color);
 }
 
 .tickerInfo-container > button[type='submit'] {

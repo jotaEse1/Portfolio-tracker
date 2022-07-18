@@ -5,7 +5,7 @@ import { changeSquare } from '../Panel/PanelSlice';
 
 interface Props {
     title: string,
-    period: string,
+    period: '_1M' | '_3M' | '_6M' | 'YTD' | 'SI',
     method: string,
     gain: number,
     value: number

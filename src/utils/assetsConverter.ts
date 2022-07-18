@@ -113,14 +113,14 @@ export const assetsConverter = (allTickers: TickerSend[], addMoney: AddMoney, po
                     tickerValue = Number((tickerValue * (tickerReturn + 1)).toFixed(2))
                     tickerPerAcumulated = (((tickerPerAcumulated + 1) * (1 + tickerReturn)) - 1)
 
-                    if (name in addMoney && `_${datetime}` in addMoney[name]) {
-                        tickerShares[name] += Number(addMoney[name][`_${datetime}`].purchaseStocks);
+                    if (name in addMoney && `_${datetime}` in addMoney[name].shares) {
+                        tickerShares[name] += Number(addMoney[name].shares[`_${datetime}`].purchaseStocks);
 
-                        portValue += Number((addMoney[name][`_${datetime}`].purchaseStocks * addMoney[name][`_${datetime}`].purchasePrice).toFixed(2));
+                        portValue += Number((addMoney[name].shares[`_${datetime}`].purchaseStocks * addMoney[name].shares[`_${datetime}`].purchasePrice).toFixed(2));
 
                         `_${datetime}` in subtractSum
-                            ? subtractSum[`_${datetime}`] += Number((addMoney[name][`_${datetime}`].purchaseStocks * addMoney[name][`_${datetime}`].purchasePrice).toFixed(2))
-                            : subtractSum[`_${datetime}`] = Number((addMoney[name][`_${datetime}`].purchaseStocks * addMoney[name][`_${datetime}`].purchasePrice).toFixed(2))
+                            ? subtractSum[`_${datetime}`] += Number((addMoney[name].shares[`_${datetime}`].purchaseStocks * addMoney[name].shares[`_${datetime}`].purchasePrice).toFixed(2))
+                            : subtractSum[`_${datetime}`] = Number((addMoney[name].shares[`_${datetime}`].purchaseStocks * addMoney[name].shares[`_${datetime}`].purchasePrice).toFixed(2))
 
                         subtractSum[`_${datetime}`] = Number((subtractSum[`_${datetime}`]).toFixed(2))
                     }
@@ -138,7 +138,7 @@ export const assetsConverter = (allTickers: TickerSend[], addMoney: AddMoney, po
                         
 
                         if (`_${datetime}` in subtractSum) {
-                            const sub = tickerReturn !== 0 && name in addMoney && `_${datetime}` in addMoney[name]? Number((addMoney[name][`_${datetime}`].purchaseStocks * addMoney[name][`_${datetime}`].purchasePrice).toFixed(2)) : subtractSum[`_${datetime}`]
+                            const sub = tickerReturn !== 0 && name in addMoney && `_${datetime}` in addMoney[name].shares? Number((addMoney[name].shares[`_${datetime}`].purchaseStocks * addMoney[name].shares[`_${datetime}`].purchasePrice).toFixed(2)) : subtractSum[`_${datetime}`]
                             returns.graph[`_${datetime}`]['total_%String'] = prevDate in returns.graph ? `(( (${returns.graph[`_${datetime}`]['total'] - sub}) / ${returns.graph[prevDate]['total']}) - 1)` : 'tickerReturn';
                             returns.graph[`_${datetime}`]['total_%'] = prevDate in returns.graph ? (((returns.graph[`_${datetime}`]['total'] - sub) / returns.graph[prevDate]['total']) - 1) : tickerReturn;
 
@@ -187,7 +187,7 @@ export const assetsConverter = (allTickers: TickerSend[], addMoney: AddMoney, po
 
 
                         if (`_${datetime}` in subtractSum) {
-                            const sub = tickerReturn !== 0 && name in addMoney && `_${datetime}` in addMoney[name]? Number((addMoney[name][`_${datetime}`].purchaseStocks * addMoney[name][`_${datetime}`].purchasePrice).toFixed(2)) : subtractSum[`_${datetime}`]
+                            const sub = tickerReturn !== 0 && name in addMoney && `_${datetime}` in addMoney[name].shares? Number((addMoney[name].shares[`_${datetime}`].purchaseStocks * addMoney[name].shares[`_${datetime}`].purchasePrice).toFixed(2)) : subtractSum[`_${datetime}`]
                             returns.graph[`_${datetime}`]['total_%String'] = prevDate in returns.graph ? `(( (${returns.graph[`_${datetime}`]['total'] - sub}) / ${returns.graph[prevDate]['total']}) - 1) ` : '0';
                             returns.graph[`_${datetime}`]['total_%'] = prevDate in returns.graph ? (((returns.graph[`_${datetime}`]['total'] - sub) / returns.graph[prevDate]['total']) - 1) : 0;
 
@@ -269,8 +269,8 @@ export const assetsConverter = (allTickers: TickerSend[], addMoney: AddMoney, po
 
                         'subtract' in returns.portfolio['_6Months'] === false
                             ? returns.portfolio['_6Months'].subtract = 0
-                            : name in addMoney && `_${datetime}` in addMoney[name]
-                                ? returns.portfolio['_6Months'].subtract += Number((addMoney[name][`_${datetime}`].purchaseStocks * addMoney[name][`_${datetime}`].purchasePrice).toFixed(2))
+                            : name in addMoney && `_${datetime}` in addMoney[name].shares
+                                ? returns.portfolio['_6Months'].subtract += Number((addMoney[name].shares[`_${datetime}`].purchaseStocks * addMoney[name].shares[`_${datetime}`].purchasePrice).toFixed(2))
                                 : returns.portfolio['_6Months'].subtract += 0
 
                         if (i === allTickers.length - 1 && j === data.length - 1) {
@@ -309,8 +309,8 @@ export const assetsConverter = (allTickers: TickerSend[], addMoney: AddMoney, po
 
                         'subtract' in returns.portfolio['_3Months'] === false
                             ? returns.portfolio['_3Months'].subtract = 0
-                            : name in addMoney && `_${datetime}` in addMoney[name]
-                                ? returns.portfolio['_3Months'].subtract += Number((addMoney[name][`_${datetime}`].purchaseStocks * addMoney[name][`_${datetime}`].purchasePrice).toFixed(2))
+                            : name in addMoney && `_${datetime}` in addMoney[name].shares
+                                ? returns.portfolio['_3Months'].subtract += Number((addMoney[name].shares[`_${datetime}`].purchaseStocks * addMoney[name].shares[`_${datetime}`].purchasePrice).toFixed(2))
                                 : returns.portfolio['_3Months'].subtract += 0
 
                         if (i === allTickers.length - 1 && j === data.length - 1) {
@@ -351,8 +351,8 @@ export const assetsConverter = (allTickers: TickerSend[], addMoney: AddMoney, po
 
                         'subtract' in returns.portfolio['_1Month'] === false
                             ? returns.portfolio['_1Month'].subtract = 0
-                            : name in addMoney && `_${datetime}` in addMoney[name]
-                                ? returns.portfolio['_1Month'].subtract += Number((addMoney[name][`_${datetime}`].purchaseStocks * addMoney[name][`_${datetime}`].purchasePrice).toFixed(2))
+                            : name in addMoney && `_${datetime}` in addMoney[name].shares
+                                ? returns.portfolio['_1Month'].subtract += Number((addMoney[name].shares[`_${datetime}`].purchaseStocks * addMoney[name].shares[`_${datetime}`].purchasePrice).toFixed(2))
                                 : returns.portfolio['_1Month'].subtract += 0
 
                         if (i === allTickers.length - 1 && j === data.length - 1) {
@@ -392,8 +392,8 @@ export const assetsConverter = (allTickers: TickerSend[], addMoney: AddMoney, po
 
                         'subtract' in returns.portfolio['YTD'] === false
                             ? returns.portfolio['YTD'].subtract = 0
-                            : name in addMoney && `_${datetime}` in addMoney[name]
-                                ? returns.portfolio['YTD'].subtract += Number((addMoney[name][`_${datetime}`].purchaseStocks * addMoney[name][`_${datetime}`].purchasePrice).toFixed(2))
+                            : name in addMoney && `_${datetime}` in addMoney[name].shares
+                                ? returns.portfolio['YTD'].subtract += Number((addMoney[name].shares[`_${datetime}`].purchaseStocks * addMoney[name].shares[`_${datetime}`].purchasePrice).toFixed(2))
                                 : returns.portfolio['YTD'].subtract += 0
 
                         if (i === allTickers.length - 1 && j === data.length - 1) {
@@ -409,7 +409,7 @@ export const assetsConverter = (allTickers: TickerSend[], addMoney: AddMoney, po
 
                         allTickers[i].returns = returns.tickers[name]
                         allTickers[i].currentPrice = close
-                        allTickers[i].sharesFlow.in = addMoney[name] || false
+                        allTickers[i].sharesFlow.in = addMoney[name] || {}
                         allTickers[i].sharesFlow.out = false
 
                     }
@@ -421,14 +421,14 @@ export const assetsConverter = (allTickers: TickerSend[], addMoney: AddMoney, po
                     continue
                 }
 
-                if (name in addMoney && `_${datetime}` in addMoney[name]) {
-                    tickerShares[name] += Number(addMoney[name][`_${datetime}`].purchaseStocks);
+                if (name in addMoney && `_${datetime}` in addMoney[name].shares) {
+                    tickerShares[name] += Number(addMoney[name].shares[`_${datetime}`].purchaseStocks);
 
-                    portValue += Number((addMoney[name][`_${datetime}`].purchaseStocks * addMoney[name][`_${datetime}`].purchasePrice).toFixed(2));
+                    portValue += Number((addMoney[name].shares[`_${datetime}`].purchaseStocks * addMoney[name].shares[`_${datetime}`].purchasePrice).toFixed(2));
 
                     `_${datetime}` in subtractSum
-                        ? subtractSum[`_${datetime}`] += Number((addMoney[name][`_${datetime}`].purchaseStocks * addMoney[name][`_${datetime}`].purchasePrice).toFixed(2))
-                        : subtractSum[`_${datetime}`] = Number((addMoney[name][`_${datetime}`].purchaseStocks * addMoney[name][`_${datetime}`].purchasePrice).toFixed(2))
+                        ? subtractSum[`_${datetime}`] += Number((addMoney[name].shares[`_${datetime}`].purchaseStocks * addMoney[name].shares[`_${datetime}`].purchasePrice).toFixed(2))
+                        : subtractSum[`_${datetime}`] = Number((addMoney[name].shares[`_${datetime}`].purchaseStocks * addMoney[name].shares[`_${datetime}`].purchasePrice).toFixed(2))
 
                     subtractSum[`_${datetime}`] = Number((subtractSum[`_${datetime}`]).toFixed(2))
                 }
@@ -450,7 +450,7 @@ export const assetsConverter = (allTickers: TickerSend[], addMoney: AddMoney, po
 
 
                     if (`_${datetime}` in subtractSum) {
-                        const sub = tickerReturn !== 0 && name in addMoney && `_${datetime}` in addMoney[name]? Number((addMoney[name][`_${datetime}`].purchaseStocks * addMoney[name][`_${datetime}`].purchasePrice).toFixed(2)) : subtractSum[`_${datetime}`]
+                        const sub = tickerReturn !== 0 && name in addMoney && `_${datetime}` in addMoney[name].shares? Number((addMoney[name].shares[`_${datetime}`].purchaseStocks * addMoney[name].shares[`_${datetime}`].purchasePrice).toFixed(2)) : subtractSum[`_${datetime}`]
                         returns.graph[`_${datetime}`]['total_%String'] = prevDate in returns.graph ? `(( (${returns.graph[`_${datetime}`]['total'] - sub}) / ${returns.graph[prevDate]['total']}) - 1)` : '0';
                         returns.graph[`_${datetime}`]['total_%'] = prevDate in returns.graph ? (((returns.graph[`_${datetime}`]['total'] - sub) / returns.graph[prevDate]['total']) - 1) : 0;
 
@@ -499,7 +499,7 @@ export const assetsConverter = (allTickers: TickerSend[], addMoney: AddMoney, po
 
 
                     if (`_${datetime}` in subtractSum) {
-                        const sub = tickerReturn !== 0 && name in addMoney && `_${datetime}` in addMoney[name]? Number((addMoney[name][`_${datetime}`].purchaseStocks * addMoney[name][`_${datetime}`].purchasePrice).toFixed(2)) : subtractSum[`_${datetime}`]
+                        const sub = tickerReturn !== 0 && name in addMoney && `_${datetime}` in addMoney[name].shares? Number((addMoney[name].shares[`_${datetime}`].purchaseStocks * addMoney[name].shares[`_${datetime}`].purchasePrice).toFixed(2)) : subtractSum[`_${datetime}`]
                         returns.graph[`_${datetime}`]['total_%String'] = prevDate in returns.graph ? `(( (${returns.graph[`_${datetime}`]['total'] - sub}) / ${returns.graph[prevDate]['total']}) - 1) ` : '0';
                         returns.graph[`_${datetime}`]['total_%'] = prevDate in returns.graph ? (((returns.graph[`_${datetime}`]['total'] - sub) / returns.graph[prevDate]['total']) - 1) : 0;
 
@@ -579,8 +579,8 @@ export const assetsConverter = (allTickers: TickerSend[], addMoney: AddMoney, po
 
                 'subtract' in returns.portfolio['_6Months'] === false
                     ? returns.portfolio['_6Months'].subtract = 0
-                    : name in addMoney && `_${datetime}` in addMoney[name]
-                        ? returns.portfolio['_6Months'].subtract += Number((addMoney[name][`_${datetime}`].purchaseStocks * addMoney[name][`_${datetime}`].purchasePrice).toFixed(2))
+                    : name in addMoney && `_${datetime}` in addMoney[name].shares
+                        ? returns.portfolio['_6Months'].subtract += Number((addMoney[name].shares[`_${datetime}`].purchaseStocks * addMoney[name].shares[`_${datetime}`].purchasePrice).toFixed(2))
                         : returns.portfolio['_6Months'].subtract += 0
 
                 if (i === allTickers.length - 1 && j === data.length - 1) {
@@ -618,8 +618,8 @@ export const assetsConverter = (allTickers: TickerSend[], addMoney: AddMoney, po
 
                 'subtract' in returns.portfolio['_3Months'] === false
                     ? returns.portfolio['_3Months'].subtract = 0
-                    : name in addMoney && `_${datetime}` in addMoney[name]
-                        ? returns.portfolio['_3Months'].subtract += Number((addMoney[name][`_${datetime}`].purchaseStocks * addMoney[name][`_${datetime}`].purchasePrice).toFixed(2))
+                    : name in addMoney && `_${datetime}` in addMoney[name].shares
+                        ? returns.portfolio['_3Months'].subtract += Number((addMoney[name].shares[`_${datetime}`].purchaseStocks * addMoney[name].shares[`_${datetime}`].purchasePrice).toFixed(2))
                         : returns.portfolio['_3Months'].subtract += 0
 
                 if (i === allTickers.length - 1 && j === data.length - 1) {
@@ -660,8 +660,8 @@ export const assetsConverter = (allTickers: TickerSend[], addMoney: AddMoney, po
 
                 'subtract' in returns.portfolio['_1Month'] === false
                     ? returns.portfolio['_1Month'].subtract = 0
-                    : name in addMoney && `_${datetime}` in addMoney[name]
-                        ? returns.portfolio['_1Month'].subtract += Number((addMoney[name][`_${datetime}`].purchaseStocks * addMoney[name][`_${datetime}`].purchasePrice).toFixed(2))
+                    : name in addMoney && `_${datetime}` in addMoney[name].shares
+                        ? returns.portfolio['_1Month'].subtract += Number((addMoney[name].shares[`_${datetime}`].purchaseStocks * addMoney[name].shares[`_${datetime}`].purchasePrice).toFixed(2))
                         : returns.portfolio['_1Month'].subtract += 0
 
                 if (i === allTickers.length - 1 && j === data.length - 1) {
@@ -702,8 +702,8 @@ export const assetsConverter = (allTickers: TickerSend[], addMoney: AddMoney, po
 
                 'subtract' in returns.portfolio['YTD'] === false
                     ? returns.portfolio['YTD'].subtract = 0
-                    : name in addMoney && `_${datetime}` in addMoney[name]
-                        ? returns.portfolio['YTD'].subtract += Number((addMoney[name][`_${datetime}`].purchaseStocks * addMoney[name][`_${datetime}`].purchasePrice).toFixed(2))
+                    : name in addMoney && `_${datetime}` in addMoney[name].shares
+                        ? returns.portfolio['YTD'].subtract += Number((addMoney[name].shares[`_${datetime}`].purchaseStocks * addMoney[name].shares[`_${datetime}`].purchasePrice).toFixed(2))
                         : returns.portfolio['YTD'].subtract += 0
 
                 if (i === allTickers.length - 1 && j === data.length - 1) {
@@ -719,7 +719,7 @@ export const assetsConverter = (allTickers: TickerSend[], addMoney: AddMoney, po
 
                 allTickers[i].returns = returns.tickers[name]
                 allTickers[i].currentPrice = close
-                allTickers[i].sharesFlow.in = addMoney[name] || false
+                allTickers[i].sharesFlow.in = addMoney[name] || {}
                 allTickers[i].sharesFlow.out = false
 
             }

@@ -60,13 +60,14 @@ const HoldingsModal = () => {
                     const { name, ...data } = response.payload
 
                     if (!addMoney[name]) {
-                        addMoney[name] = { total: 0, totalIn: 0 } as ShareFlow
+                        addMoney[name] = { shares: {}, total: 0, totalIn: 0 } as ShareFlow
 
-                        addMoney[name][`_${data.purchaseDateUnix}`] = data
+                        addMoney[name].shares[`_${data.purchaseDateUnix}`] = data
                         addMoney[name].total = Number((data.purchasePrice * data.purchaseStocks).toFixed(2))
                         addMoney[name].totalIn = Number(data.purchaseStocks)
+
                     } else {
-                        addMoney[name][`_${data.purchaseDateUnix}`] = data
+                        addMoney[name].shares[`_${data.purchaseDateUnix}`] = data
                         addMoney[name].total += data.purchasePrice * data.purchaseStocks
                         addMoney[name].total = Number((addMoney[name].total).toFixed(2))
                         addMoney[name].totalIn += Number(data.purchaseStocks)

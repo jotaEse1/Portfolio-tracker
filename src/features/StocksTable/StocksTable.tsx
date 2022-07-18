@@ -7,9 +7,9 @@ import { RiArrowRightSFill, RiArrowDownSFill} from 'react-icons/ri'
 const StocksTable = () => {
     const { currentPortfolio } = useAppSelector(state => state.dashboard),
         [tickerFlows, setTickerFlows] = useState<{ [key: string]: boolean }>({}),
-        allRefs = new Array(currentPortfolio.tickers.length).fill(1).map(() => createRef()),
+        allRefs: React.RefObject<SVGSVGElement>[] = new Array(currentPortfolio.tickers.length).fill(1).map(() => createRef()),
         entries = Object.entries(currentPortfolio.returns.graph),
-        min = entries.length - 7 <= 0 ? 0 : entries.length - 7,
+        min: number = entries.length - 7 <= 0 ? 0 : entries.length - 7,
         max = entries.length,
         data = Object.fromEntries(entries.slice(min, max)),
         keys = Object.keys(data),
@@ -157,12 +157,10 @@ const StocksTable = () => {
                     <tbody>
                         {currentPortfolio.tickers.length ? (
                             currentPortfolio.tickers.map((ticker, i) => {
-                                const moneyIn = ticker.sharesFlow.in ? ticker.sharesFlow.in.total : 0,  
-                                    sharesIn = ticker.sharesFlow.in ? ticker.sharesFlow.in.totalIn : 0,
-                                    moneyOut = ticker.sharesFlow.out ? ticker.sharesFlow.out.total : 0,
-                                    sharesOut = ticker.sharesFlow.out ? ticker.sharesFlow.out.totalOut : 0,
-                                    totalShares = sharesIn - sharesOut + Number(ticker.purchaseStocks),
-                                    totalCost = Number(((ticker.purchasePrice * ticker.purchaseStocks) + moneyIn - moneyOut).toFixed(2)),
+                                const moneyIn = !!ticker.sharesFlow.in.total ? ticker.sharesFlow.in.total : 0,  
+                                    sharesIn = !!ticker.sharesFlow.in.totalIn ? ticker.sharesFlow.in.totalIn : 0,
+                                    totalShares = sharesIn + Number(ticker.purchaseStocks),
+                                    totalCost = Number(((ticker.purchasePrice * ticker.purchaseStocks) + moneyIn).toFixed(2)),
                                     currentValue = Number((totalShares * ticker.currentPrice).toFixed(2));
 
                                     portfolioData.totalShares += totalShares
@@ -221,8 +219,8 @@ const StocksTable = () => {
                                         </tr>
                                         <>
                                             {tickerFlows[ticker.name] && (
-                                                Object.keys(ticker.sharesFlow.in).map(key => {
-                                                    if (key === 'total') return
+                                                Object.keys(ticker.sharesFlow.in.shares).map(key => {
+                                                    
                                                     if (key === 'totalIn'){
                                                         const totalCostInfo = (Number(ticker.purchaseStocks) * Number(ticker.purchasePrice)).toFixed(2),
                                                             marketValueInfo = ((Number(ticker.purchaseStocks) * Number(ticker.currentPrice))).toFixed(2),
@@ -243,21 +241,21 @@ const StocksTable = () => {
                                                             </tr>
                                                         )
                                                     }
-
-                                                    const totalCostInfo = (Number(ticker.sharesFlow.in[key].purchaseStocks) * Number(ticker.sharesFlow.in[key].purchasePrice)).toFixed(2),
-                                                        marketValueInfo = ((Number(ticker.sharesFlow.in[key].purchaseStocks) * Number(ticker.currentPrice))).toFixed(2),
+                                                    
+                                                    const totalCostInfo = (Number(ticker.sharesFlow.in.shares[key].purchaseStocks) * Number(ticker.sharesFlow.in.shares[key].purchasePrice)).toFixed(2),
+                                                        marketValueInfo = ((Number(ticker.sharesFlow.in.shares[key].purchaseStocks) * Number(ticker.currentPrice))).toFixed(2),
                                                         netValueInfo = (Number(marketValueInfo) - Number(totalCostInfo)).toFixed(2);
 
                                                     return (
                                                         <tr key={key + i} className='tr-ticker-flow'>
-                                                            <td className='td-name-flow'>-- {ticker.sharesFlow.in[key].purchaseDate.slice(0,11)}</td>
-                                                            <td>{ticker.sharesFlow.in[key].purchaseStocks}</td>
+                                                            <td className='td-name-flow'>-- {ticker.sharesFlow.in.shares[key].purchaseDate.slice(0,11)}</td>
+                                                            <td>{ticker.sharesFlow.in.shares[key].purchaseStocks}</td>
                                                             <td>$ {totalCostInfo}</td>
                                                             <td>$ {marketValueInfo}</td>
                                                             <td
                                                                 className={Number(netValueInfo) >= 0 ? 'return-table-positive' : 'return-table-negative'}
                                                             >$ {netValueInfo} </td>
-                                                            <td>$ {ticker.sharesFlow.in[key].purchasePrice}</td>
+                                                            <td>$ {ticker.sharesFlow.in.shares[key].purchasePrice}</td>
                                                             <td colSpan={8}></td>
                                                         </tr>
                                                     )
