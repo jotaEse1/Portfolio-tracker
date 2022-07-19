@@ -7,6 +7,16 @@ const Colors = () => {
     const { colors, color, isColorsOpen } = useAppSelector(state => state.colors)
     const dispatch = useAppDispatch()
 
+    const setTheme = (colorObj: {name: string; hex: string; back: string;}) => {
+        const root = document.querySelector(':root') as HTMLDivElement;
+
+        root.style.setProperty('--scrollBar-back', colorObj.back);
+        root.style.setProperty('--scrollBar-color', colorObj.hex);
+        dispatch(setColor({ name: colorObj.name, hex: colorObj.hex }))
+
+        
+    }
+
     return (
         <>
             {!isColorsOpen ? (
@@ -27,16 +37,17 @@ const Colors = () => {
                     </div>
                     <div className='all-colors'>
                         {colors.map(one =>
-                            <div key={one.hex}>
+                            <div 
+                                key={one.hex}
+                                onClick={() => setTheme({ name: one.name, hex: one.hex, back: one.back })}
+                            >
                                 <div
                                     className={color.name === one.name ? 'one-color-f selected' : 'one-color-f'}
                                     style={{ background: one.back }}
-                                    onClick={() => dispatch(setColor({ name: one.name, hex: one.hex }))}
                                 ></div>
                                 <div
                                     className={color.name === one.name ? 'one-color-s selected' : 'one-color-s'}
                                     style={{ background: one.hex }}
-                                    onClick={() => dispatch(setColor({ name: one.name, hex: one.hex }))}
                                 ></div>
                             </div>
                         )}

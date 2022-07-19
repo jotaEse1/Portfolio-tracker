@@ -26,6 +26,9 @@ code {
   --success-color: #5cb85c;
   --danger-color: #ED5E68;
   --oposite-color: #fff;
+  --scrollBar-back: #121212;
+  --scrollBar-color: #39FF14;
+
 
   --text-color: #fff;
   --line-chart-color: #fff2;
@@ -46,6 +49,8 @@ code {
   --success-color: #5cb85c;
   --danger-color: #ED5E68;
   --oposite-color: #fff;
+  --scrollBar-back: #121212;
+  --scrollBar-color: #00ECFF;
   
   --text-color: #fff;
   --line-chart-color: #fff2;
@@ -66,6 +71,8 @@ code {
   --success-color: #5cb85c;
   --danger-color: #ED5E68;
   --oposite-color: #fff;
+  --scrollBar-back: #121212;
+  --scrollBar-color: #FF55A2;
   
   --text-color: #fff;
   --line-chart-color: #fff2;
@@ -86,6 +93,8 @@ code {
   --success-color: #5cb85c;
   --danger-color: #ED5E68;
   --oposite-color: #fff;
+  --scrollBar-back: #121212;
+  --scrollBar-color: #FF0000;
   
   --text-color: #fff;
   --line-chart-color: #fff2;
@@ -106,12 +115,34 @@ code {
   --success-color: #5cb85c;
   --danger-color: #ED5E68;
   --oposite-color: #fff;
+  --scrollBar-back: #121212;
+  --scrollBar-color: #FEED26;
   
   --text-color: #fff;
   --line-chart-color: #fff2;
   --boxShadow-color: transparent;
   --transition-details: .4s;
 }
+
+/* [data-theme ='green']{
+  --background: #121212;
+  --background-contrast: #1E1E1E;
+  --detail-color: #39FF14;
+  --detail-color2: #39FF1450;
+  --border-color: #39FF14;
+  --chart-shadow: #39FF1480;
+  --returns-back-positive: #eaf9f010;
+  --returns-back-negative: #ffeaec10;
+  --gradient: linear-gradient(180deg, #39FF1466 100%, rgba(18,18,18,0) 100%);
+  --success-color: #5cb85c;
+  --danger-color: #ED5E68;
+  --oposite-color: #fff;
+
+  --text-color: #fff;
+  --line-chart-color: #fff2;
+  --boxShadow-color: transparent;
+  --transition-details: .4s;
+} */
 
 [data-theme ='black']{
   --background: #fff;
@@ -126,6 +157,8 @@ code {
   --success-color: #5cb85c;
   --danger-color: #ED5E68;
   --oposite-color: #000;
+  --scrollBar-back: #fff;
+  --scrollBar-color: #120052;
   
   --text-color: #000;
   --line-chart-color: #fff2;
@@ -153,7 +186,7 @@ code {
   --transition-details: .4s;
 } */
 
-[data-theme ='prueba']{
+[data-theme ='violet']{
   --background: #fff;
   --background-contrast: #D0D0D0;
   --detail-color: #3330E4;
@@ -166,6 +199,8 @@ code {
   --success-color: #5cb85c;
   --danger-color: #ED5E68;
   --oposite-color: #000;
+  --scrollBar-back: #fff;
+  --scrollBar-color: #3330E4;
   
   --text-color: #000;
   --line-chart-color: #fff2;
@@ -177,10 +212,10 @@ code {
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
-  background-color: var(--background);
+  background: var(--scrollBar-back);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--detail-color);
+  background-color: var(--scrollBar-color);
   border-radius: 2px;
 }

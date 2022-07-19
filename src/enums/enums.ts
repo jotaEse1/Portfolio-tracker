@@ -11,4 +11,10 @@ export enum URLS {
 
 */
 
+/* produccion
+PORTFOLIO = 'https://portfolio-tracker-server-js.herokuapp.com/api/v1/portfolio',
+    HOLDINGS = 'https://portfolio-tracker-server-js.herokuapp.com/api/v1/portfolio/holdings',
+    UPDATEPORTFOLIO = 'https://portfolio-tracker-server-js.herokuapp.com/api/v1/portfolio/update'
+*/
+
 // https://api.tdameritrade.com/v1/instruments?apikey=ZEXA1X6AL3OSMFJYI7TECJNYSB4W3IHV&symbol=aapl&projection=fundamental

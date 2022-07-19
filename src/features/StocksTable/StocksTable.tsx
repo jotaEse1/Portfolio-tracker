@@ -218,27 +218,43 @@ const StocksTable = () => {
                                             </td>
                                         </tr>
                                         <>
-                                            {tickerFlows[ticker.name] && (
-                                                Object.keys(ticker.sharesFlow.in.shares).map(key => {
-                                                    
-                                                    if (key === 'totalIn'){
+                                            {tickerFlows[ticker.name] && ( 
+                                                Object.keys(ticker.sharesFlow.in.shares).map((key, i) => {
+                                                    if (i === 0){
                                                         const totalCostInfo = (Number(ticker.purchaseStocks) * Number(ticker.purchasePrice)).toFixed(2),
                                                             marketValueInfo = ((Number(ticker.purchaseStocks) * Number(ticker.currentPrice))).toFixed(2),
-                                                            netValueInfo = (Number(marketValueInfo) - Number(totalCostInfo)).toFixed(2);
+                                                            netValueInfo = (Number(marketValueInfo) - Number(totalCostInfo)).toFixed(2),
+                                                            totalCostInfoAdd = (Number(ticker.sharesFlow.in.shares[key].purchaseStocks) * Number(ticker.sharesFlow.in.shares[key].purchasePrice)).toFixed(2),
+                                                            marketValueInfoAdd = ((Number(ticker.sharesFlow.in.shares[key].purchaseStocks) * Number(ticker.currentPrice))).toFixed(2),
+                                                            netValueInfoAdd = (Number(marketValueInfoAdd) - Number(totalCostInfoAdd)).toFixed(2);
 
                                                         return (
-                                                            <tr key={key + i} className='tr-ticker-flow'>
-                                                                <td className='td-name-flow'>-- {ticker.purchaseDate.slice(0,11)}</td>
-                                                                <td>{ticker.purchaseStocks}</td>
-                                                                <td>$ {totalCostInfo}</td>
-                                                                <td>$ {marketValueInfo}</td>
-                                                                <td
-                                                                    className={Number(netValueInfo) >= 0 ? 'return-table-positive' : 'return-table-negative'}
-                                                                >$ {netValueInfo} </td>
-                                                                <td>$ {ticker.purchasePrice}</td>
-                        
-                                                                <td colSpan={8}></td>
-                                                            </tr>
+                                                            <>
+                                                                <tr key={key + i} className='tr-ticker-flow'>
+                                                                    <td className='td-name-flow'>-- {ticker.purchaseDate.slice(0,11)}</td>
+                                                                    <td>{ticker.purchaseStocks}</td>
+                                                                    <td>$ {totalCostInfo}</td>
+                                                                    <td>$ {marketValueInfo}</td>
+                                                                    <td
+                                                                        className={Number(netValueInfo) >= 0 ? 'return-table-positive' : 'return-table-negative'}
+                                                                    >$ {netValueInfo} </td>
+                                                                    <td>$ {ticker.purchasePrice}</td>
+                            
+                                                                    <td colSpan={8}></td>
+                                                                </tr>
+                                                                <tr key={key + netValueInfoAdd} className='tr-ticker-flow'>
+                                                                    <td className='td-name-flow'>-- {ticker.sharesFlow.in.shares[key].purchaseDate.slice(0,11)}</td>
+                                                                    <td>{ticker.sharesFlow.in.shares[key].purchaseStocks}</td>
+                                                                    <td>$ {totalCostInfoAdd}</td>
+                                                                    <td>$ {marketValueInfoAdd}</td>
+                                                                    <td
+                                                                        className={Number(netValueInfoAdd) >= 0 ? 'return-table-positive' : 'return-table-negative'}
+                                                                    >$ {netValueInfoAdd} </td>
+                                                                    <td>$ {ticker.sharesFlow.in.shares[key].purchasePrice}</td>
+                                                                    <td colSpan={8}></td>
+                                                                </tr>
+                                                            
+                                                            </>
                                                         )
                                                     }
                                                     

@@ -38,7 +38,7 @@ const PaginationT: React.FC<Props> = ({ data, keys, currentPage, setCurrentPage,
 
                     return (
                         <>
-                            <tr key={date}>
+                            <tr key={data[date].date + gainOrLoss}>
                                 <td
                                     style={Object.keys(data[date].shares).length ? { cursor: 'pointer' } : {}}
                                     onClick={() => {
@@ -69,7 +69,7 @@ const PaginationT: React.FC<Props> = ({ data, keys, currentPage, setCurrentPage,
 
 
                                         return (
-                                            <tr key={`${ticker}-${date}`} className='tr-ticker-flow'>
+                                            <tr key={`${data[date].shares[ticker].value}`} className='tr-ticker-flow'>
                                                 <td className='td-name-flow-transaction'>{ticker}</td>
                                                 <td>{(data[date].shares[ticker]['%'] * 100).toFixed(2)} %</td>
                                                 <td>$ {(data[date].shares[ticker].value).toFixed(2)}</td>
