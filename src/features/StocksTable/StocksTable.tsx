@@ -219,7 +219,7 @@ const StocksTable = () => {
                                         </tr>
                                         <>
                                             {tickerFlows[ticker.name] && ( 
-                                                Object.keys(ticker.sharesFlow.in.shares).map((key, i) => {
+                                                Object.keys(ticker.sharesFlow.in.shares).map((key, i) => { 
                                                     if (i === 0){
                                                         const totalCostInfo = (Number(ticker.purchaseStocks) * Number(ticker.purchasePrice)).toFixed(2),
                                                             marketValueInfo = ((Number(ticker.purchaseStocks) * Number(ticker.currentPrice))).toFixed(2),
