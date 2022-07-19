@@ -1,7 +1,7 @@
 import { Detail, Fundamental, TickerDescriptionAPI } from "../types/types";
 
 export const fetchTicker = (ticker: string) : Promise<[Fundamental, Detail]> => {
-    let url = `https://api.tdameritrade.com/v1/instruments?apikey=ZEXA1X6AL3OSMFJYI7TECJNYSB4W3IHV&symbol=${ticker}&projection=fundamental`;
+    let url = `https://${process.env.REACT_APP_API_PROVIDER}/v1/instruments?apikey=${process.env.REACT_APP_API_KEY}&symbol=${ticker}&projection=fundamental`;
 
 
     return new Promise((resolve, reject) => {

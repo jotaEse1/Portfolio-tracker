@@ -12,7 +12,8 @@ const Colors = () => {
 
         root.style.setProperty('--scrollBar-back', colorObj.back);
         root.style.setProperty('--scrollBar-color', colorObj.hex);
-        dispatch(setColor({ name: colorObj.name, hex: colorObj.hex }))
+        dispatch(setColor(colorObj))
+        localStorage.setItem('theme-color', JSON.stringify(colorObj))
 
         
     }

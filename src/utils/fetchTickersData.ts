@@ -75,9 +75,7 @@ export const fetchDataTickers = (ticker: TickerRow, portfolioValue: number, alre
         if(_6MonthsUnix <= purchaseDateUnix  &&  _6MonthsUnix <= YTDUnix) startDate = _6MonthsUnix
         if(YTDUnix <= purchaseDateUnix  && YTDUnix <= _6MonthsUnix) startDate = YTDUnix
         
-
-        //const url = `https://api.tdameritrade.com/v1/marketdata/${name}/pricehistory?apikey=ZEXA1X6AL3OSMFJYI7TECJNYSB4W3IHV&periodType=month&frequencyType=daily&endDate=1653037200000&startDate=1619902800000&needExtendedHoursData=false`
-        const url = `https://api.tdameritrade.com/v1/marketdata/${name}/pricehistory?apikey=ZEXA1X6AL3OSMFJYI7TECJNYSB4W3IHV&periodType=month&frequencyType=daily&endDate=${todayUnix}&startDate=${startDate}&needExtendedHoursData=false`
+        const url = `https://${process.env.REACT_APP_API_PROVIDER}/v1/marketdata/${name}/pricehistory?apikey=${process.env.REACT_APP_API_KEY}&periodType=month&frequencyType=daily&endDate=${todayUnix}&startDate=${startDate}&needExtendedHoursData=false`
 
 
         fetch(url)
