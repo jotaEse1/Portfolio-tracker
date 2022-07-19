@@ -70,7 +70,7 @@ const AllPortfolios = () => {
             }
 
 
-            if (!!sharesFlow.in) {
+            if (!!sharesFlow.in.shares) {
                 const keys = Object.keys(sharesFlow.in.shares)
 
                 for (let j = 0; j < keys.length; j++) {
