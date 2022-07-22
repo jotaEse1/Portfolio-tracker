@@ -69,6 +69,7 @@ export const logIn = createAsyncThunk('authentication/logIn',
     async (credentials: {email: string, password: string}, thunkAPI) => {
         const options: RequestInit = {
             method: 'POST',
+            credentials: 'include',
             headers: {
                 'Accept': 'application/json',
                 'Content-type': 'application/json'
