@@ -14,8 +14,6 @@ const Colors = () => {
         root.style.setProperty('--scrollBar-color', colorObj.hex);
         dispatch(setColor(colorObj))
         localStorage.setItem('theme-color', JSON.stringify(colorObj))
-
-        
     }
 
     return (
@@ -40,16 +38,11 @@ const Colors = () => {
                         {colors.map(one =>
                             <div 
                                 key={one.hex}
-                                onClick={() => setTheme({ name: one.name, hex: one.hex, back: one.back })}
+                                onClick={() => setTheme(one)}
+                                className={color.name === one.name ? 'selected' : 'undefined'}
                             >
-                                <div
-                                    className={color.name === one.name ? 'one-color-f selected' : 'one-color-f'}
-                                    style={{ background: one.back }}
-                                ></div>
-                                <div
-                                    className={color.name === one.name ? 'one-color-s selected' : 'one-color-s'}
-                                    style={{ background: one.hex }}
-                                ></div>
+                                <div className='one-color-f' style={{ background: one.back }}></div>
+                                <div className='one-color-s' style={{ background: one.hex }}></div>
                             </div>
                         )}
                     </div>

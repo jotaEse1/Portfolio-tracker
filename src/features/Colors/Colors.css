@@ -93,7 +93,8 @@
 }
 
 .selected {
-    border: 0.12rem solid var(--oposite-color);
+    border-radius: 100%;
+    border: 2px solid var(--oposite-color);
 }
 
 @media (max-width: 858px){

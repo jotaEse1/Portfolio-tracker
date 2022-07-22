@@ -1,0 +1,77 @@
+.signIn-container {
+    width: 20rem;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: var(--background);
+    background: rgba(255, 255, 255, 0.14);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(7.3px);
+    -webkit-backdrop-filter: blur(7.3px);
+    border: 1px solid rgba(255, 255, 255, 0.19);
+}
+
+.signIn-container > h2 {
+    padding-bottom: 0.5rem;
+}
+
+.signIn-inputs-container {
+    width: max-content;
+    height: 12rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.signIn-inputs-container > label {
+    justify-self: flex-start;
+    align-self: flex-start;
+}
+
+.signIn-inputs-container > input {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    border-bottom: 2px solid var(--oposite-color);
+}
+
+.signIn-inputs-container > span {
+    border: 2px solid transparent;
+    cursor: pointer;
+    font-size: .8rem;
+}
+
+.signIn-inputs-container > span:hover {
+    color: var(--detail-color);
+    border-bottom: 2px solid var(--detail-color);
+}
+
+.signIn-inputs-container > button {
+    background-color: transparent;
+    padding: 0.4rem;
+    border: 2px solid var(--text-color);
+    border-radius: 3px;
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+.signIn-inputs-container > button:hover {
+    background-color: var(--detail-color);
+    padding: 0.4rem;
+    border: 2px solid transparent;
+    border-radius: 3px;
+    color: var(--background);
+    cursor: pointer;
+}
+
+@media (max-width: 480px){
+    .signIn-container {
+        width: 90vw;
+    }
+}
+
+
+

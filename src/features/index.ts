@@ -16,10 +16,12 @@ import HoldingsReducer from "./HoldingsModal/HoldingsModalSlice";
 import TransactionsReducer from "./Transactions/TransactionsSlice";
 import PanelReducer from "./Panel/PanelSlice";
 import TickerReducer from "./Ticker/TickerSlice";
+import AuthenticationReducer from "./Authentication/AuthenticationSlice";
 
 export const store = configureStore({
     reducer: {
         dashboard: dashboardReducer,
+        authentication: AuthenticationReducer,
         ticker: TickerReducer,
         home: HomeReducer,
         portfolioModal: PortfolioModalReducer,

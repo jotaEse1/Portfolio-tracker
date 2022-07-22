@@ -226,12 +226,6 @@ const SideBar = () => {
                                     <BsArrowReturnRight />
                                 </button>
                             </div>
-                            <div className='sidebar-portfolio-options'>
-                                Screener
-                                <button className='view-button'>
-                                    <BsArrowReturnRight />
-                                </button>
-                            </div>
                         </div>
                     </div>
                     <div className='sidebar-door-opened'

@@ -12,6 +12,7 @@ import Transactions from './features/Transactions/Transactions';
 import Ticker from './features/Ticker/Ticker';
 import { useLayoutEffect } from 'react';
 import { setColor } from './features/Colors/ColorsSlice';
+import Authentication from './features/Authentication/Authentication';
 
 function App() {
   const { isHomeOpen } = useAppSelector(state => state.home)
@@ -19,51 +20,57 @@ function App() {
   const { portfoliosOpen } = useAppSelector(state => state.home)
   const { color } = useAppSelector(state => state.colors)
   const { isOpenPM } = useAppSelector(state => state.portfolioModal)
-  const {isLoaderOpen} = useAppSelector(state => state.loader)
-  const {isOpenTI} = useAppSelector(state => state.tickerInforamtion)
+  const { isLoaderOpen } = useAppSelector(state => state.loader)
+  const { isOpenTI } = useAppSelector(state => state.tickerInforamtion)
   const { isOpenHM } = useAppSelector(state => state.holdingsModal)
-  const {isOpenT} = useAppSelector(state => state.transactions)
-  const {isTickerOpen} = useAppSelector(state => state.ticker)
+  const { isOpenT } = useAppSelector(state => state.transactions)
+  const { isTickerOpen } = useAppSelector(state => state.ticker)
+  const { isAuthenticated } = useAppSelector(state => state.authentication)
   const dispatch = useAppDispatch()
 
   useLayoutEffect(() => {
     const themeColor = localStorage.getItem('theme-color'),
       root = document.querySelector(':root') as HTMLDivElement;
 
-      
-    if(!themeColor){
-      localStorage.setItem('theme-color', JSON.stringify({name: 'green', hex: '#39FF14', back: '#121212'}))
+    if (!themeColor) {
+      localStorage.setItem('theme-color', JSON.stringify({ name: 'green', hex: '#39FF14', back: '#121212' }))
       root.style.setProperty('--scrollBar-back', '#121212');
       root.style.setProperty('--scrollBar-color', '#39FF14');
 
-    }else{
+    } else {
       const objTheme = JSON.parse(themeColor)
 
       dispatch(setColor(objTheme))
       root.style.setProperty('--scrollBar-back', objTheme.back);
       root.style.setProperty('--scrollBar-color', objTheme.hex);
-
     }
 
   }, [])
-  
+
 
   return (
     <div className='app' data-theme={color.name}>
-      {isHomeOpen && <Home />}
-      {isDashboardOpen && <Dashboard />}
-      {isTickerOpen && <Ticker />}
-      {portfoliosOpen && <AllPortfolios />}
-      <Colors />
-      {isOpenPM && <PortfolioModal />}
-      {isOpenHM && <HoldingsModal />}
-      {isOpenTI && <TickerInfo />}
-      {isLoaderOpen &&
-        <div className='loader-container'>
-          <Loader />
-        </div>
-      }
-      {isOpenT && <Transactions />}
+      {isAuthenticated ? (
+        <>
+          {isHomeOpen && <Home />}
+          {isDashboardOpen && <Dashboard />}
+          {isTickerOpen && <Ticker />}
+          {portfoliosOpen && <AllPortfolios />}
+          <Colors />
+          {isOpenPM && <PortfolioModal />}
+          {isOpenHM && <HoldingsModal />}
+          {isOpenTI && <TickerInfo />}
+          {isLoaderOpen &&
+            <div className='loader-container'>
+              <Loader />
+            </div>
+          }
+          {isOpenT && <Transactions />}
+
+        </>
+      ) : (
+        <Authentication />
+      )}
     </div>
   );
 }

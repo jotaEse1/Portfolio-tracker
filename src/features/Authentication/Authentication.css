@@ -1,0 +1,17 @@
+.authentication-container {
+    width: 100vw;
+    height: 100vh;
+    background-image: var(--background-image-auth);
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: var(--background);
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+@media (max-width: 480px){
+    .authentication-container {
+        justify-content: center;
+    }
+}

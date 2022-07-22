@@ -1,6 +1,8 @@
 .home-container {
     width: 100vw;
     min-height: 100vh;
+    background-color: var(--background);
+    background-image: var(--background-image-home);
 }
 
 .home-content {
@@ -15,12 +17,17 @@
 
 .home-content > h1 {
     font-size: 100px;
+    text-align: center;
+    color: var(--detail-color2);
+    -webkit-text-stroke: 2px var(--detail-color);
 }
 
 .home-sections {
+    width: 100%;
     height: max-content;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-evenly;
     align-items: center;
 }
 
@@ -29,10 +36,22 @@
     width: 70vw;
 }
 
-.home-sections > div > h4 {
-    font-size: 25px;
+.home-sections > h4 {
+    font-size: 35px;
     text-align: center;
     cursor: pointer;
+    color: var(--detail-color);
+    border: 2px solid var(--detail-color);
+    padding: 0.5rem;
+    border-radius: 5px;
+}
+
+.home-sections > h4:hover {
+    color: var(--text-color);
+    border: 2px solid var(--detail-color2);
+    background-color: var(--detail-color2);
+    padding: 0.5rem;
+    border-radius: 5px;
 }
 
 .home-portfolios {
@@ -61,8 +80,8 @@
         text-align: center;
     }
 
-    .home-sections > div > h4 {
-        font-size: 7vw;
+    .home-sections > h4 {
+        font-size: 8vw;
         text-align: center;
     }
 }

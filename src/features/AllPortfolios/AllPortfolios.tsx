@@ -17,6 +17,7 @@ import { assetsConverter } from '../../utils/assetsConverter';
 import { dates } from '../../utils/dates';
 
 const AllPortfolios = () => {
+    const {user} = useAppSelector(state => state.authentication)
     const { portfolios, today } = useAppSelector(state => state.dashboard)
     const { isOpenIP } = useAppSelector(state => state.portfolioModal)
     const { isOpenMM } = useAppSelector(state => state.modalMsg)
@@ -156,7 +157,7 @@ const AllPortfolios = () => {
         const { tickers: updatedTickers, returns, value } = assetsConverter(allTickers, addMoney, portVal, capitalObj)
 
         const updatePortf: UpdatePortfolio = {
-            idUser: 1,
+            idUser: user,
             idPortfolio: portfolio.id,
             name: portfolio.name,
             lastUpdate: `${year}-${month}-${date} ${hour}:${minutes}:${seconds}`,

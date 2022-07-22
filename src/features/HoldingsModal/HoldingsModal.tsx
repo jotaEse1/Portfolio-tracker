@@ -13,6 +13,7 @@ import { holdingActions } from '../Dashboard/DashboardSlice';
 
 
 const HoldingsModal = () => {
+    const {user} = useAppSelector(state => state.authentication)
     const { ui } = useAppSelector(state => state.holdingsModal)
     const { currentPortfolio } = useAppSelector(state => state.dashboard)
     const { tickerRows, portfolioValue } = useAppSelector(state => state.portfolioModal)
@@ -135,7 +136,7 @@ const HoldingsModal = () => {
         const { tickers, returns, value } = assetsConverter(allTickers, addMoney, portVal, capitalObj)
 
         const portfolio: HoldingsSend = {
-            idUser: 1,
+            idUser: user,
             idPortfolio: currentPortfolio.id,
             name: currentPortfolio.name,
             lastUpdate: `${year}-${month}-${date} ${hour}:${minutes}:${seconds}`,

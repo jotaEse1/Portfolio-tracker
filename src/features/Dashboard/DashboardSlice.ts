@@ -92,7 +92,7 @@ export const createPortfolio = createAsyncThunk('dashboard/createPortfolios',
 )
 
 export const renamePortfolio = createAsyncThunk('dashboard/renamePortfolios',
-    async (data: { id: number, name: string }, thunkAPI) => {
+    async (data: { idUser: string, id: number, name: string }, thunkAPI) => {
         const options: RequestInit = {
             method: 'PUT',
             headers: {
@@ -125,7 +125,7 @@ export const renamePortfolio = createAsyncThunk('dashboard/renamePortfolios',
 )
 
 export const deletePortfolio = createAsyncThunk('dashboard/deletePortfolios',
-    async (obj: { id: number }, thunkAPI) => {
+    async (obj: { idUser: string, id: number }, thunkAPI) => {
         const options: RequestInit = {
             method: 'DELETE',
             headers: {

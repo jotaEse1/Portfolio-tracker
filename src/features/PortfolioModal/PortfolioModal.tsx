@@ -14,6 +14,7 @@ import { closeLoader, openLoader } from '../Loader/LoaderSlice';
 
 const PortfolioModal = () => {
     const [form, setForm] = useState({ name: '' })
+    const {user} = useAppSelector(state => state.authentication)
     const { tickerRows, portfolioValue} = useAppSelector(state => state.portfolioModal)
     const dispatch = useAppDispatch()
 
@@ -138,7 +139,7 @@ const PortfolioModal = () => {
         const {tickers, returns, value} = assetsConverter(allTickers, addMoney, portVal, capitalObj)
 
         const portfolio: PortfolioSend = {
-            idUser: 1,
+            idUser: user,
             name: form.name.trim(),
             lastUpdate: `${year}-${month}-${date} ${hour}:${minutes}:${seconds}`,
             value,

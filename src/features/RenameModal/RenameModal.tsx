@@ -11,6 +11,7 @@ import { closeRename } from './RenameModalSlice';
 
 const RenameModal = () => {
     const [form, setForm] = useState({ name: '' })
+    const {user} = useAppSelector(state => state.authentication)
     const { currentPortfolio } = useAppSelector(state => state.dashboard)
     const { optAction } = useAppSelector(state => state.renameModal)
     const dispatch = useAppDispatch()
@@ -31,7 +32,7 @@ const RenameModal = () => {
 
         dispatch(openLoader())
         dispatch(
-            renamePortfolio({ id: currentPortfolio.id, name: form.name.trim() })
+            renamePortfolio({ idUser: user, id: currentPortfolio.id, name: form.name.trim() })
         )
         dispatch(closeRename())
     }
@@ -39,15 +40,11 @@ const RenameModal = () => {
     const handleDelete = () => {
         dispatch(openLoader())
         dispatch(
-            deletePortfolio({ id: currentPortfolio.id })
+            deletePortfolio({ idUser: user, id: currentPortfolio.id })
         )
         dispatch(closeRename())
         dispatch(closeDashboard())
         dispatch(openPortfolios())
-    }
-
-    const handleRetire = () => {
-
     }
 
     return (

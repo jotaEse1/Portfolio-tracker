@@ -115,7 +115,7 @@ const TickerInfo = () => {
                     <IoMdClose />
                 </button>
                 <button type='submit'>
-                    Add
+                    {operation === 'Add'? 'Add' : 'Modify'}
                 </button>
             </form>
         </div>

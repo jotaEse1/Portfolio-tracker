@@ -298,7 +298,7 @@ export interface TickerSend {
 }
 
 export interface PortfolioSend {
-    idUser: number,
+    idUser: string,
     name: string,
     lastUpdate: string,
     value: number,
@@ -344,7 +344,7 @@ export interface AddMoney {
 }
 
 export interface HoldingsSend {
-    idUser: number,
+    idUser: string,
     idPortfolio: number,
     name: string,
     lastUpdate: string,
@@ -355,7 +355,7 @@ export interface HoldingsSend {
 }
 
 export interface UpdatePortfolio {
-    idUser: number,
+    idUser: string,
     idPortfolio: number,
     name: string,
     lastUpdate: string,
