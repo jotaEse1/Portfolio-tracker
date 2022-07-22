@@ -1,4 +1,5 @@
 import { useEffect, useLayoutEffect, useState } from 'react';
+import { URLS } from '../../enums/enums';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import Colors from '../Colors/Colors';
 import { setColor } from '../Colors/ColorsSlice';
@@ -34,8 +35,7 @@ const Authentication = () => {
     }, [])
 
     useEffect(() => {
-        const url = 'http://localhost:5000/api/v1/authentication/refresh_token',
-          options: RequestInit = {
+        const options: RequestInit = {
             method: 'POST',
             credentials: 'include', // Needed to include the cookie
             headers: {
@@ -43,7 +43,7 @@ const Authentication = () => {
             }
           };
     
-        fetch(url, options)
+        fetch(URLS.REFRESH, options)
           .then(res => res.json())
           .then(res => {
             const {accessToken}  = res;
