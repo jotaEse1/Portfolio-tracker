@@ -134,10 +134,6 @@
     fill: var(--text-color);
 }
 
-.tick > line {
-    /* stroke: transparent; */
-}
-
 .tooltip {
     width: max-content;
     height: max-content;

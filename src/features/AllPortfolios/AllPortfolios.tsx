@@ -15,6 +15,7 @@ import { fetchDataTickers } from '../../utils/fetchTickersData';
 import { closeMM, openMM, setMsg } from '../ModalMsg/ModalMsgSlice';
 import { assetsConverter } from '../../utils/assetsConverter';
 import { dates } from '../../utils/dates';
+import Navbar from '../Navbar/Navbar';
 
 const AllPortfolios = () => {
     const {user} = useAppSelector(state => state.authentication)
@@ -172,9 +173,10 @@ const AllPortfolios = () => {
 
     return (
         <div className='all-portfolios-container'>
-            <div className='all-portfolios-title'>
+            <Navbar ui='portfolio'/>
+            {/* <div className='all-portfolios-title'>
                 <h1>Portfolios</h1>
-            </div>
+            </div> */}
             <div className='all-portfolios-buttons'>
                 <button
                     onClick={() => dispatch(openPM())}

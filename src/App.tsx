@@ -3,7 +3,6 @@ import Dashboard from './features/Dashboard/Dashboard';
 import Home from './features/Home/Home';
 import AllPortfolios from './features/AllPortfolios/AllPortfolios';
 import { useAppDispatch, useAppSelector } from './hooks/hooks';
-import Colors from './features/Colors/Colors';
 import PortfolioModal from './features/PortfolioModal/PortfolioModal';
 import Loader from './features/Loader/Loader';
 import TickerInfo from './features/TickerInfo/TickerInfo';
@@ -56,7 +55,6 @@ function App() {
           {isDashboardOpen && <Dashboard />}
           {isTickerOpen && <Ticker />}
           {portfoliosOpen && <AllPortfolios />}
-          <Colors />
           {isOpenPM && <PortfolioModal />}
           {isOpenHM && <HoldingsModal />}
           {isOpenTI && <TickerInfo />}

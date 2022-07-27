@@ -4,11 +4,13 @@ import { assetsConverter } from '../../utils/assetsConverter';
 import { fetchTicker } from '../../utils/fetchTicker';
 import { closeLoader, openLoader } from '../Loader/LoaderSlice';
 import { setDetail, setFundamental, setTickerGraph, setTickerT } from '../Ticker/TickerSlice';
+import { CgSearch } from 'react-icons/cg';
 import './TickerDescription.css'
+import { closeMM, openMM, setMsg } from '../ModalMsg/ModalMsgSlice';
 
 const TickerDescription = () => {
-    const [form, setForm] = useState({ticker: ''})
-    const {detailTicker, isTickerSet} = useAppSelector(state => state.ticker)
+    const [form, setForm] = useState({ ticker: '' })
+    const { detailTicker, isTickerSet } = useAppSelector(state => state.ticker)
     const dispatch = useAppDispatch()
 
     const handleForm = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -18,91 +20,82 @@ const TickerDescription = () => {
         })
     }
 
-    const handleSearch = () => {
+    const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
         dispatch(openLoader())
 
-        const {ticker} = form,
+        const { ticker } = form,
             today = Date.now();
 
-        if(!ticker){
+        if (!ticker) {
             dispatch(closeLoader())
-            return //modal
+            dispatch(setMsg('You should provide a ticker'))
+            dispatch(openMM())
+            setTimeout(() => dispatch(closeMM()), 3500)
+            return
         }
 
         fetchTicker(ticker)
             .then(array => {
-                console.log(array)
-                if(!array.length){
+                if (!array.length) {
                     dispatch(closeLoader())
-                    return //modal
+                    dispatch(setMsg(`Ticker "${ticker}" not found`))
+                    dispatch(openMM())
+                    setTimeout(() => dispatch(closeMM()), 3500)
+                    return
                 }
 
-                const {0: fundamental, 1: detail} = array
+                const { 0: fundamental, 1: detail } = array
 
-                return fetch(`https://api.tdameritrade.com/v1/marketdata/${ticker}/pricehistory?apikey=ZEXA1X6AL3OSMFJYI7TECJNYSB4W3IHV&periodType=month&frequencyType=daily&endDate=${today}&startDate=0&needExtendedHoursData=false`)
+                return fetch(`https://${process.env.REACT_APP_API_PROVIDER}/v1/marketdata/${ticker}/pricehistory?apikey=${process.env.REACT_APP_API_KEY}&periodType=year&frequencyType=monthly&endDate=${today}&startDate=0&needExtendedHoursData=false`)
                     .then(res => res.json())
                     .then(res => {
-                        let { candles, empty, error } = res,
-                            run = 0, minPrice = Date.now(), maxPrice = 0, minDate = Date.now(), maxDate = 0,
-                            hundredCandles = [],
-                            chunkCandles = []
-                        
+                        let { candles, empty, error } = res;
 
                         if (error) {
                             dispatch(closeLoader())
-                            return new Error('Bad request')
+                            dispatch(setMsg('An error ocurred. Try again later'))
+                            dispatch(openMM())
+                            setTimeout(() => dispatch(closeMM()), 3500)
+                            return
                         }
                         if (empty) {
                             dispatch(closeLoader())
-                            return //modal
+                            dispatch(setMsg(`Ticker "${ticker}" not found`))
+                            dispatch(openMM())
+                            setTimeout(() => dispatch(closeMM()), 3500)
+                            return
                         }
 
-                        for (let i = 0; i < candles.length; i++) {
-                            const day = candles[i];
-                            
-                            if(day.low < minPrice) minPrice = day.low
-                            if(day.high > maxPrice) maxPrice = day.high
-                            if(day.datetime > maxDate) maxDate = day.datetime
-                            if(day.datetime < minDate) minDate = day.datetime
-
-                            if(run === 20){
-                                chunkCandles.push(hundredCandles)
-                                run = 0
-                                hundredCandles = []
-                            }else{
-                                hundredCandles.push(day)
-                                run += 1
-                            }
-                        }
-
-                        console.log(minPrice, maxPrice, minDate, maxDate, chunkCandles)
-
-                        dispatch(setTickerGraph({
-                            minPrice,
-                            maxPrice, 
-                            minDate,
-                            maxDate,
-                            chunkCandles,
-                            candles
-                        }))
+                        dispatch(setTickerGraph(candles))
                         dispatch(setFundamental(fundamental))
-                        dispatch(setDetail(detail))
+                        dispatch(setDetail({ ...detail, price: candles.at(-1).close }))
                         dispatch(setTickerT())
                         dispatch(closeLoader())
                     })
-                    .catch(err => err)
-
-
+                    .catch(err => {
+                        dispatch(closeLoader())
+                        dispatch(setMsg('An error ocurred. Try again later.'))
+                        dispatch(openMM())
+                        setTimeout(() => dispatch(closeMM()), 3500)
+                    })
             })
             .catch(err => {
-                //modal
+                dispatch(closeLoader())
+                dispatch(setMsg('An error ocurred. Try again later.'))
+                dispatch(openMM())
+                setTimeout(() => dispatch(closeMM()), 3500)
             })
 
     }
 
     return (
         <div className='ticker-description-container'>
-            <div className='ticker-search-container'>
+            <form
+                className='ticker-search-container'
+                onSubmit={handleSearch}
+            >
                 <input
                     type="text"
                     name='ticker'
@@ -111,13 +104,10 @@ const TickerDescription = () => {
                     required
                     placeholder='Search Ticker...'
                 />
-                <button
-                    type='button'
-                    onClick={handleSearch}
-                >
-                    Q
+                <button>
+                    <CgSearch />
                 </button>
-            </div>
+            </form>
             {isTickerSet && (
                 <div className='ticker-about-container'>
                     <div>
@@ -125,7 +115,7 @@ const TickerDescription = () => {
                         <p className='Ticker'>{detailTicker.symbol}</p>
                         <p className='Asset'>{detailTicker.assetType}</p>
                     </div>
-                    <p>$ 140.82</p>
+                    <p>$ {detailTicker.price}</p>
                 </div>
             )}
 

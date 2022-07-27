@@ -3,6 +3,7 @@ export enum URLS {
     HOLDINGS = 'https://portfolio-tracker-server-js.herokuapp.com/api/v1/portfolio/holdings',
     UPDATEPORTFOLIO = 'https://portfolio-tracker-server-js.herokuapp.com/api/v1/portfolio/update',
     LOGIN = 'https://portfolio-tracker-server-js.herokuapp.com/api/v1/authentication/login',
+    LOGOUT = 'https://portfolio-tracker-server-js.herokuapp.com/api/v1/authentication/logout',
     SIGNIN = 'https://portfolio-tracker-server-js.herokuapp.com/api/v1/authentication/signin',
     REFRESH = 'https://portfolio-tracker-server-js.herokuapp.com/api/v1/authentication/refresh_token'
 }
@@ -12,6 +13,7 @@ export enum URLS {
     HOLDINGS = 'http://localhost:5000/api/v1/portfolio/holdings',
     UPDATEPORTFOLIO = 'http://localhost:5000/api/v1/portfolio/update',
     LOGIN = 'http://localhost:5000/api/v1/authentication/login',
+    LOGOUT = 'http://localhost:5000/api/v1/authentication/logout',
     SIGNIN = 'http://localhost:5000/api/v1/authentication/signin',
     REFRESH = 'http://localhost:5000/api/v1/authentication/refresh_token'
 
@@ -22,6 +24,7 @@ export enum URLS {
     HOLDINGS = 'https://portfolio-tracker-server-js.herokuapp.com/api/v1/portfolio/holdings',
     UPDATEPORTFOLIO = 'https://portfolio-tracker-server-js.herokuapp.com/api/v1/portfolio/update',
     LOGIN = 'https://portfolio-tracker-server-js.herokuapp.com/api/v1/authentication/login',
+    LOGOUT = 'https://portfolio-tracker-server-js.herokuapp.com/api/v1/authentication/logout',
     SIGNIN = 'https://portfolio-tracker-server-js.herokuapp.com/api/v1/authentication/signin',
     REFRESH = 'https://portfolio-tracker-server-js.herokuapp.com/api/v1/authentication/refresh_token'
 */

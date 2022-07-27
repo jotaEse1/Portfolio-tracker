@@ -35,10 +35,6 @@ export const getPortfolios = createAsyncThunk('dashboard/getPortfolios',
                 thunkAPI.dispatch(openMM())
                 setTimeout(() => thunkAPI.dispatch(closeMM()), 3500)
             } else {
-                thunkAPI.dispatch(closeLoader())
-                thunkAPI.dispatch(setMsg(response.payload.msg))
-                thunkAPI.dispatch(openMM())
-                setTimeout(() => thunkAPI.dispatch(closeMM()), 3500)
                 return response.payload.data
             }
         } catch (error) {

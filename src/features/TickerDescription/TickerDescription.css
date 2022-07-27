@@ -14,16 +14,17 @@
     outline: none;
     border-bottom: 2px solid var(--detail-color2);
     color: var(--detail-color);
-    padding: 0.2rem;
+    padding: 0.5rem;
 }
 
 .ticker-search-container > button{
-    background-color: var(--detail-color2);
-    border: none;
-    color: var(--detail-color);
     padding: 0.5rem;
     border-radius: 3px;
+    border: 2px solid transparent;
+    background-color: var(--detail-color2);
+    color: var(--detail-color);
     cursor: pointer;
+    margin-left: 0.5rem;
 }
 
 .ticker-about-container {

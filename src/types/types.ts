@@ -1,13 +1,3 @@
-// export interface ShareFlow {
-//     [key: string]: { //date unix _18124389
-//         purchaseDate: string,
-//         purchaseDateUnix: number,
-//         purchasePrice: number,
-//         purchaseStocks: number,
-//     },
-//     total: number,
-//     totalIn: number
-// }
 export interface ShareFlow {
     shares: {
         [key: string]: { //date unix _18124389
@@ -141,6 +131,7 @@ export interface Detail {
     description: string;
     exchange: string;
     symbol: string;
+    price: string;
 }
 
 export interface TickerReturns {
@@ -316,18 +307,6 @@ export interface PortfolioRecived {
     returns: string
 }
 
-// export interface AddMoney {
-//     [key: string]: { //tickername 
-//         [key: string]: { //date unix _18124389
-//             purchaseDate: string,
-//             purchaseDateUnix: number,
-//             purchasePrice: number,
-//             purchaseStocks: number,
-//         },
-//         total: number,
-//         totalIn: number
-//     }
-// }
 export interface AddMoney {
     [key: string]: { //tickername 
         shares: {
@@ -364,14 +343,7 @@ export interface UpdatePortfolio {
     returns: {}
 }
 
-export interface TickerGraph {
-    minPrice: number,
-    maxPrice: number,
-    minDate: number,
-    maxDate: number,
-    chunkCandles: TickerAPI[][],
-    candles: TickerAPI[]
-}
+
 
 
 

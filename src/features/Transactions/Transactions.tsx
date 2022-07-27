@@ -32,7 +32,7 @@ const Transactions = () => {
 
     return (
         <div className='transactions-container'>
-            <Navbar />
+            <Navbar ui='special'/>
             <div className='button-container'>
                 <button
                     type='button'

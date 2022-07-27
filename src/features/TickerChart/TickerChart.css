@@ -8,12 +8,102 @@
     padding: 2rem 0rem;
 }
 
-.svg-ticker-container {
-    width: 90%;
+.ticker-chart {
     height: 100%;
+    width: 90%;
+    background-color: var(--background-contrast);
+    border-radius: 5px;
+}
+
+.svg-ticker-container {
+    width: 100%;
+    height: 90%;
+}
+
+.ticker-labels-container {
+    width: 100%;
+    height: max-content;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 0.2rem;
+}
+
+.ticker-labels-container > div { 
+    width: max-content;
+    height: max-content;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 0.2rem;
+    background-color: var(--background);
+    border-radius: 5px;
+}
+
+.ticker-labels-container > div > div > p {
+    text-align: center;
+    font-size: 12px;
+}
+
+.modality-option {
+    padding: 0.3rem;
+    width: max-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    border: 2px solid transparent;
+    color: var(--detail-color);
+    cursor: pointer;
+}
+
+.modality-selected {
+    padding: 0.3rem;
+    width: max-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    border: 2px solid var(--detail-color);
+    cursor: pointer;
+}
+
+.modality-selected > p{
+    text-align: center;
+    color: var(--detail-color);
+}
+
+.modality-selected {
+    color: var(--detail-color);
 }
 
 .line-ticker {
     stroke: var(--detail-color);
 }
 
+.circle-ticker {
+    stroke: var(--background);
+    stroke-width: 2px;
+    fill: var(--detail-color);
+}
+
+.x-ticker, .y-ticker {
+    stroke: var(--detail-color);
+}
+
+.x-ticker-candles {
+    stroke: var(--text-color);
+    stroke-dasharray: 5,5;
+}
+
+@media (max-width: 570px){
+    .ticker-chart-container {
+        height: 70vh; 
+    }
+}

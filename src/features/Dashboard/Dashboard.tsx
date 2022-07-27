@@ -18,7 +18,7 @@ const Dashboard = () => {
 
     return (
         <div className='dashboard-container'>
-            <Navbar />
+            <Navbar ui='special'/>
             <Panel />
             <SideBar />
             <Chart />

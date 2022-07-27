@@ -17,6 +17,7 @@ import TransactionsReducer from "./Transactions/TransactionsSlice";
 import PanelReducer from "./Panel/PanelSlice";
 import TickerReducer from "./Ticker/TickerSlice";
 import AuthenticationReducer from "./Authentication/AuthenticationSlice";
+import NavbarReducer from "./Navbar/NavbarSlice";
 
 export const store = configureStore({
     reducer: {
@@ -37,6 +38,7 @@ export const store = configureStore({
         transactions: TransactionsReducer,
         panel: PanelReducer,
         colors: ColorsReducer,
+        navbar: NavbarReducer,
         counter: counterReducer,
     }
 })

@@ -1,35 +1,46 @@
 .colors-container-close {
-    position: fixed;
-    z-index: 300;
-    top: 2vh;
-    left: 5vw;
-    width: max-content;
-    height: max-content;
-    padding: 0.5rem;
+    /* position: fixed; */
+    /* z-index: 300; */
+    /* top: 2vh; */
+    /* left: 5vw; */
+    /* width: max-content; */
+    /* height: max-content; */
+    /* padding: 0.5rem; */
     display: flex;
-    flex-direction: row;
+    /* flex-direction: row; */
     align-items: center;
     justify-content: center;
     border-radius: 100%;
     background-color: var(--background-contrast);
     cursor: pointer;
+    margin: 0.75rem 0rem 0rem 1rem;
+
+    flex-direction: column;
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 0rem;
 }
 
 .colors-container-open {
-    position: fixed;
-    z-index: 300;
-    top: 2vh;
-    left: 5vw;
-    width: max-content;
+    /* position: fixed; */
+    /* z-index: 300; */
+    /* top: 2vh; */
+    /* left: 5vw; */
+    /* width: max-content; */
     height: max-content;
     padding: 0.5rem;
     display: flex;
-    flex-direction: row;
+    /* flex-direction: row; */
     align-items: center;
     justify-content: center;
     border-radius: 5px;
     background-color: var(--background-contrast);
     cursor: pointer;
+    margin: 0.75rem 0rem 0rem 1rem;
+
+    flex-direction: column;
+    border: 1px solid var(--detail-color2);
+    width: 2.5rem;
 }
 
 .one-color-door {
@@ -77,11 +88,20 @@
     height: max-content;
     background-color: transparent;
     display: flex;
-    flex-direction: row;
+    /* flex-direction: row; */
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
-    padding-left: 0.5rem;
+    /* gap: 0.5rem; */
+    /* padding-left: 0.5rem; */
+
+    flex-direction: column;
+    padding-left: 0rem;
+    padding-top: 0.5rem;
+    gap: 0rem;
+}
+
+.all-colors > div {
+    margin: 0.15rem 0rem;
 }
 
 .color-option-container{

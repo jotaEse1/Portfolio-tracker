@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Detail, Fundamental, TickerGraph } from "../../types/types";
+import { Detail, Fundamental, TickerAPI} from "../../types/types";
 
 interface State {
     isTickerOpen: boolean,
     fundamentalTicker: Fundamental,
     detailTicker: Detail,
     isTickerSet: boolean,
-    tickerGraph: TickerGraph
+    tickerGraph: TickerAPI[]
 }
 
 const initialState: State = {
@@ -14,7 +14,7 @@ const initialState: State = {
     fundamentalTicker: {} as Fundamental,
     detailTicker: {} as Detail,
     isTickerSet: false,
-    tickerGraph: {} as TickerGraph
+    tickerGraph: []
 }
 
 const tickerSlice = createSlice({
@@ -33,7 +33,7 @@ const tickerSlice = createSlice({
         },
         setTickerT: (state) => {state.isTickerSet = true},
         setTickerF: (state) => {state.isTickerSet = false},
-        setTickerGraph: (state, action: PayloadAction<TickerGraph>) => {
+        setTickerGraph: (state, action: PayloadAction<TickerAPI[]>) => {
             const {payload} = action
             state.tickerGraph = payload
         }

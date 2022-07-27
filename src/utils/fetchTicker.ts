@@ -1,4 +1,12 @@
-import { Detail, Fundamental, TickerDescriptionAPI } from "../types/types";
+import { Fundamental, TickerDescriptionAPI } from "../types/types";
+
+interface Detail {
+    assetType: string;
+    cusip: string;
+    description: string;
+    exchange: string;
+    symbol: string;
+}
 
 export const fetchTicker = (ticker: string) : Promise<[Fundamental, Detail]> => {
     let url = `https://${process.env.REACT_APP_API_PROVIDER}/v1/instruments?apikey=${process.env.REACT_APP_API_KEY}&symbol=${ticker}&projection=fundamental`;
@@ -8,18 +16,20 @@ export const fetchTicker = (ticker: string) : Promise<[Fundamental, Detail]> => 
         fetch(url)
             .then(res => res.json())
             .then((response: { [key: string]: TickerDescriptionAPI }) => {
-                //response --> {} or {tickername: {}}
                 console.log(response)
 
                 if (!response[ticker]) {
-                    return reject([])
+                    const resp = [] as unknown as [Fundamental, Detail]
+                    return resolve(resp)
                 }
 
                 const { fundamental, ...detail } = response[ticker]
 
                 return resolve([fundamental, detail])
             })
-            .catch(err => { throw new Error(err) })
+            .catch(err => { 
+                reject(new Error(err))
+            })
 
     })
 }
