@@ -1,11 +1,11 @@
 export enum URLS {
-    PORTFOLIO = 'https://portfolio-tracker-server-js.herokuapp.com/api/v1/portfolio',
-    HOLDINGS = 'https://portfolio-tracker-server-js.herokuapp.com/api/v1/portfolio/holdings',
-    UPDATEPORTFOLIO = 'https://portfolio-tracker-server-js.herokuapp.com/api/v1/portfolio/update',
-    LOGIN = 'https://portfolio-tracker-server-js.herokuapp.com/api/v1/authentication/login',
-    LOGOUT = 'https://portfolio-tracker-server-js.herokuapp.com/api/v1/authentication/logout',
-    SIGNIN = 'https://portfolio-tracker-server-js.herokuapp.com/api/v1/authentication/signin',
-    REFRESH = 'https://portfolio-tracker-server-js.herokuapp.com/api/v1/authentication/refresh_token'
+    PORTFOLIO = 'https://portfolio-tracker-server-i437l0gvu-jotaese1.vercel.app/api/v1/portfolio',
+    HOLDINGS = 'https://portfolio-tracker-server-i437l0gvu-jotaese1.vercel.app/api/v1/portfolio/holdings',
+    UPDATEPORTFOLIO = 'https://portfolio-tracker-server-i437l0gvu-jotaese1.vercel.app/api/v1/portfolio/update',
+    LOGIN = 'https://portfolio-tracker-server-i437l0gvu-jotaese1.vercel.app/api/v1/authentication/login',
+    LOGOUT = 'https://portfolio-tracker-server-i437l0gvu-jotaese1.vercel.app/api/v1/authentication/logout',
+    SIGNIN = 'https://portfolio-tracker-server-i437l0gvu-jotaese1.vercel.app/api/v1/authentication/signin',
+    REFRESH = 'https://portfolio-tracker-server-i437l0gvu-jotaese1.vercel.app/api/v1/authentication/refresh_token'
 }
 
 /* local
@@ -20,12 +20,12 @@ export enum URLS {
 */
 
 /* produccion
-    PORTFOLIO = 'https://portfolio-tracker-server-js.herokuapp.com/api/v1/portfolio',
-    HOLDINGS = 'https://portfolio-tracker-server-js.herokuapp.com/api/v1/portfolio/holdings',
-    UPDATEPORTFOLIO = 'https://portfolio-tracker-server-js.herokuapp.com/api/v1/portfolio/update',
-    LOGIN = 'https://portfolio-tracker-server-js.herokuapp.com/api/v1/authentication/login',
-    LOGOUT = 'https://portfolio-tracker-server-js.herokuapp.com/api/v1/authentication/logout',
-    SIGNIN = 'https://portfolio-tracker-server-js.herokuapp.com/api/v1/authentication/signin',
-    REFRESH = 'https://portfolio-tracker-server-js.herokuapp.com/api/v1/authentication/refresh_token'
+    PORTFOLIO = 'https://portfolio-tracker-server-i437l0gvu-jotaese1.vercel.app/api/v1/portfolio',
+    HOLDINGS = 'https://portfolio-tracker-server-i437l0gvu-jotaese1.vercel.app/api/v1/portfolio/holdings',
+    UPDATEPORTFOLIO = 'https://portfolio-tracker-server-i437l0gvu-jotaese1.vercel.app/api/v1/portfolio/update',
+    LOGIN = 'https://portfolio-tracker-server-i437l0gvu-jotaese1.vercel.app/api/v1/authentication/login',
+    LOGOUT = 'https://portfolio-tracker-server-i437l0gvu-jotaese1.vercel.app/api/v1/authentication/logout',
+    SIGNIN = 'https://portfolio-tracker-server-i437l0gvu-jotaese1.vercel.app/api/v1/authentication/signin',
+    REFRESH = 'https://portfolio-tracker-server-i437l0gvu-jotaese1.vercel.app/api/v1/authentication/refresh_token'
 */
 
